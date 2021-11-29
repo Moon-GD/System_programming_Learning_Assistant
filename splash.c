@@ -10,6 +10,7 @@ void study();
 void chap2();
 void chap2_concept();
 void chap2_goal();
+void chap2_command();
 
 int main()
 {
@@ -311,7 +312,7 @@ void study()
 
 		mar(0, "학습을 시작합니다.");
 
-		mar(2, "학습에 도움을 받은 챕터를 선택해주세요.");
+		mar(2, "학습에 도움을 받을 챕터를 선택해주세요.");
 
 		sleep(1);
 
@@ -387,7 +388,7 @@ void chap2()
 
 		mar(6, "2. 개념 학습");
 
-		mar(8, "3. 명령어 및 함수 정리");
+		mar(8, "3. C언어 함수 정리");
 
 		mar(10, "0. 종료");
 
@@ -408,7 +409,9 @@ void chap2()
 				break;	
 
 			case '3':
-
+				endwin();
+				chap2_command();
+				break;
 
 			case '0':
 				endwin();
@@ -638,7 +641,140 @@ void chap2_concept()
 	}
 }
 
+void chap2_command()
+{
+	initscr();
 
+	while(1)
+	{
+		clear();
+		refresh();
+
+		char c;
+	
+		mar(0, "C언어 함수를 살펴봅니다.");
+
+		sleep(1);
+
+		mar(2, "1. open");
+
+		mar(4, "2. read");
+
+		mar(6, "3. close");
+
+		mar(8, "4. creat");
+
+		mar(10, "5. write");
+
+		mar(12, "6. lseek");
+
+		mar(14, "0. 종료");
+
+		mar(16, "번호를 입력해주세요 : ");
+
+		getnstr(&c, 1);
+
+		switch(c)
+		{
+			case '1':
+				clear();
+				mar(0, "open 함수 정리");
+				mar(2, "헤더 파일 : <fcntl.h>");
+				mar(4, "용도 : 파일과의 연결을 형성하고자 할 때 사용. 즉, 파일의 내용을 읽거나 파일을 다루고 싶을 때 사용함"); 	
+				mar(6, "사용 방법 : open(열고자 하는 파일 이름, int how)");
+				mar(7, "파일을 여는 목적에 따라 how의 값이 달라짐");
+				mar(8, "O_RDONLY : 읽기 전용, O_WRONLY : 쓰기 전용, O_RDWR : 읽고 쓰기 전용");
+				mar(9, "예시) open(input.txt, O_RDONLY");
+				mar(11, "return 값");
+				mar(12, "실패시 -1 반환, 성공시 file_descriptor 반환");
+				mar(13, "file_descriptor : 파일과의 연결을 형성하면 프로세스마다 커널의 배열에 파일과의 연결 번호를 저장하는데 그 값을 의미");
+				mar(14, "좀 더 나아가자면 모든 프로세스들은 기본적으로 0, 1, 2의 파일 디스크립터를 가지고 있다.");
+				mar(15, "0 : 표준 입력, 1 : 표준 출력, 2 : 표준 에러 출력 (자세한 내용은 다른 챕터에서 공부함)");
+				mar(19, "Enter to end");
+				getnstr(&c, 1);
+				break;
+				
+			case '2':
+				clear();
+				mar(0, "read 함수 정리");
+				mar(2, "헤더 파일 : <unistd.h>");
+				mar(4, "용도 : 파일의 내용을 지정한 버퍼에 담기 위해 사용. 즉, 파일의 내용을 읽기 위해서 사용함");
+				mar(6, "사용 방법 : read(열고자 하는 파일의 fd, 버퍼 포인터, 읽을 크기)");
+				mar(7, "예시) read(3, &buffer, BUFSIZ)");
+				mar(9, "실패시 -1 반환, 성공시 읽은 만큼의 수를 반환");
+				mar(13, "Enter to end");
+				getnstr(&c, 1);
+				break;
+	
+			case '3':
+				clear();
+				mar(0, "close 함수 정리");
+				mar(2, "헤더 파일 : <unistd.h>");
+				mar(4, "용도 : 파일과의 연결을 해제하고자 할 때 사용.");
+				mar(6, "사용 방법 : close(해제하고자 하는 파일의 fd)");
+				mar(7, "예시) close(3)");		
+				mar(9, "실패시 -1 반환, 성공시 0 반환");
+				mar(13, "Enter to end");
+				getnstr(&c, 1);	
+				break;
+
+			case '4':
+				clear();
+				mar(0, "creat 함수 정리");
+				mar(2, "헤더 파일 : <fcntl.h>");
+				mar(4, "용도 : 새로운 파일을 만들고자 할 때 사용");
+				mar(6, "사용 방법 : creat(새로운 파일의 이름, mode_t mode)");
+				mar(7, "mode는 rw-r--r--와 같은 파일 권한을 의미");
+				mar(8, "mode 표현 방법은 파일의 권한을 이진법으로 표기한 후 8진법으로 작성한다");
+				mar(9, "예를 들어 rw-r--r--가 파일 권한이라면 이진법으로는 110100100이 되고 이를 8진법으로 고치면 0644가 된다");
+				mar(10, "컴퓨터마다 기본적으로 깔려 있는 계산기의 프로그래머 기능을 활용하면 편하니 꼭 사용해볼 것");
+				mar(11, "예시) creat(filename, 0644)");
+				mar(13, "실패시 -1 반환, 성공시 새로운 파일의 파일 디스크립터를 반환");
+				mar(17, "Enter to end");
+				getnstr(&c, 1);
+				break;
+
+			case '5':
+				clear();
+				mar(0, "write 함수 정리");
+				mar(2, "헤더 파일 : <unistd.h>");
+				mar(4, "용도 : 버퍼의 내용을 파일에 담기 위해 사용. 즉, 파일에 내용을 쓰고 싶을 때 사용함");
+				mar(6, "사용 방법 : write(작성할 파일의 fd, 버퍼 포인터, 작성할 양");
+				mar(7, "예시) write(1, &buffer, BUFSIZ)");
+				mar(9, "실패시 -1을 반환, 성공시 작성한 만큼의 양을 반환");
+				mar(13, "Enter to end");
+				getnstr(&c, 1);
+				break;
+
+			case '6':
+				clear();
+				mar(0, "lseek 함수 정리");
+				mar(2, "헤더 파일 : <sys/types.h> <unistd.h>");
+				mar(4, "용도 : 간단하게 설명하면 파일 내부에서 커서의 위치를 옮기기 위해서 사용함");
+				mar(6, "사용 방법 : lseek(파일의 fd, 옮길 만큼의 거리, 시작점)");
+				mar(7, "예시) lseek(3, 10, SEEK_CUR) : 커서의 현재 위치에서 10만큼 이동한다");
+				mar(8, "시작점에 대한 변수 3가지");
+				mar(9, "SEEK_SET : 시작점, SEEK_CUR : 현재 위치, SEEK_END : 파일의 끝지점");
+				mar(11, "실패시 -1을 반환하며 성공시 0을 반환");
+				mar(15, "Enter to end");
+				getnstr(&c, 1);
+				break;	
+				clear();
+			
+			case '0':
+				endwin();
+				return; 
+	
+			defalut:
+				mar(20, "올바른 형식으로 입력해주세요.");	
+				usleep(1000 * 0.5);
+
+
+		}	
+
+		
+	}
+}
 
 
 
