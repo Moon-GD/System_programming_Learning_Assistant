@@ -7,10 +7,18 @@
 void menu();  // menu 선택 화면
 void background();  // 만들게 된 배경
 void study();
+
+// chap 2
 void chap2();
 void chap2_concept();
 void chap2_goal();
 void chap2_command();
+
+// chap 3
+void chap3();
+void chap3_goal();
+void chap3_concept();
+void chap3_command();
 
 int main()
 {
@@ -347,6 +355,10 @@ void study()
 				break;			
 
 			case '3':
+				clear();
+				endwin();
+				chap3();
+				break;
 
 			case '4':
 
@@ -652,7 +664,7 @@ void chap2_command()
 
 		char c;
 	
-		mar(0, "C언어 함수를 살펴봅니다.");
+		mar(0, "챕터 2의 C언어 함수를 살펴봅니다.");
 
 		sleep(1);
 
@@ -776,9 +788,423 @@ void chap2_command()
 	}
 }
 
+void chap3()
+{
+        initscr();
+
+        while(1)
+        {
+                clear();
+
+                char choice;
+
+                mar(0, "챕터 3의 학습을 시작합니다.");
+
+                mar(2, "학습하실 항목을 선택해주세요.");
+
+                sleep(1);
+
+                mar(4, "1. 학습 주제 및 목표");
+
+                mar(6, "2. 개념 학습");
+
+                mar(8, "3. C언어 함수 정리");
+
+                mar(10, "0. 종료");
+
+                mar(12, "번호를 입력해주세요 : ");
+
+                getnstr(&choice, 1);
+
+                switch(choice)
+                {
+                        case '1':
+                                endwin();
+                                chap3_goal();
+                                break;
+
+                        case '2':
+                                endwin();
+                                chap3_concept();
+                                break;
+
+                        case '3':
+                                endwin();
+                                chap3_command();
+                                break;
+
+                        case '0':
+                                endwin();
+                                return ;
+
+                        default:
+                                mar(16, "올바른 형식으로 입력해주세요.");
+                                usleep(1000 * 0.5);
+                }
+        }
+}
+
+void chap3_goal()
+{
+        initscr();
+        char c;
+        while(1)
+        {
+                clear();
+
+                mar(0, "●  학습 주제 : ls 명령어란? ");
+
+                mar(2, "●  학습 목표 : ");
+
+                mar(4, "  1. ls 명령어의 개념을 정확하게 이해하고 여러 명령어들을 활용할 수 있다.");
+
+                mar(6, "  2. 디렉토리의 정확한 의미와 내부 구조를 파악할 수 있다.");
+
+                mar(8, "  3. File에 관한 특성 및 정보를 정확하게 이해할 수 있다.");
+
+		mar(10, "  4. ls 명령어 프로그램을 작성할 수 있다."); 
+ 
+                sleep(1);
+
+                mar(14, " Enter to back to menu");
+
+                getnstr(&c, 1);
+
+                endwin();
+                break;
+        }
 
 
+}
 
+void chap3_concept()
+{
+	char c;
+	
+	while(1) {
+	
+	clear();
+	mar(0, "1. ls 명령어가 하는 일");
+
+	sleep(1);
+
+	mar(2, "모든 프로세스는 자신이 위치하고 있는 디렉토리의 위치 정보를 포함하고 있습니다.");
+
+	mar(4, "ls는 현재 프로세스가 위치하고 있는 디렉토리의 파일들과 하위 디렉토리의 정보를 출력해주는 명령어 입니다.");
+
+	mar(6, "기본적은로 옵션 없이 $ ls  를 실행할 경우 파일의 이름만 출력되게 됩니다.");
+
+	mar(8, "예시) $ ls");
+
+	mar(10, "공개 음악 문서 다운로드 test input.txt");
+
+	mar(12, "파일에 관한 좀 더 자세한 설명을 받고자 한다면 ls 뒤에 옵션을 주어서 실행하면 됩니다.");
+
+	mar(14, "가장 많이 사용되는 옵션은 '-l' 입니다. $ ls -l 을 하게 되면 각 파일에 대한 세부적인 정보를 불러올 수 있습니다.");
+
+	mar(16, "더 나아가 a를 붙이면 '-al'은 숨겨져 있던 파일의 내용도 출력해주며 (all)");
+
+	mar(18, "i를 붙이게 되면 각 파일의 inode number도 추가적으로 파악할 수 있습니다. (추후에 배우게 됨)");
+
+	mar(20, "하이픈 기호(-) 를 사용한 옵션 말고도 다른 디렉토리의 이름을 옵션으로 줄 수 있습니다.");
+
+	mar(22, "예를 들어 루트 노드에 있는 tmp 디렉토리 파일의 정보를 불러오고 싶다면 $ ls /tmp 와 같이 사용하면 됩니다.");
+
+	mar(24, "정리해서 ls 명령어는 크게 2가지 정도만 이해하면 될 것 같습니다.");
+
+	mar(26, "1. ls 명령어는 디렉토리 내부의 파일 정보를 읽어온다.");	
+
+	mar(28, "2. -a 옵션을 주었을 때 출력되는 '.'은 현재 디렉토리를 의미하며 '..'은 상위 디렉토리를 의미한다.");
+
+	mar(32, "Enter to Continue (0 : 종료)");
+
+	getnstr(&c, 1);
+	if(c == '0') { break;}
+	clear();
+
+	mar(0, "2. ls 명령어의 구현");
+
+	sleep(1);
+
+	mar(2, "ls 명령어의 기본적인 logic은 다음과 같습니다.");
+
+	mar(4, "①  open 디렉토리");
+
+	mar(6, "②  디렉토리 내부의 항목들 읽어오기");
+
+	mar(8, "③  파일 세부 정보 출력");
+
+	mar(10, "④  디렉토리의 모든 항목들에 대해서 ②  ~ ③  반복 수행");
+
+	mar(12, "⑤  close 디렉토리");
+
+	mar(14, "그렇다면 ①  번에서 디렉토리를 open 하기 위해서 chapter 2에서 사용했었던 open 함수를 사용해도 될까요?");
+
+	mar(16, "결론을 말씀드리자면, 디렉토리는 파일과 내부적인 구조가 다르게 구현되어 있기 때문에 다른 라이브러리를 불러와서 사용해야 합니다.");
+
+	mar(18, "<sys/types.h>  :  디렉토리 구조체와 디렉토리 포인터의 자료형이 구현되어 있는 헤더 파일");
+
+	mar(20, "<dirent.h> : 디렉토리와 관련된 함수들이 구현되어 있는 헤더 파일");
+
+	mar(22, "기본적으로 <dirent.h>의 opendir(), readdir(), closedir()을 통해서 디렉토리를 다루게 되는데 자세한 함수 설명은 함수 정리 부분에서 다루겠습니다.");
+
+	mar(26, "Enter to Continue (0 : 종료)");
+
+	getnstr(&c, 1);
+	if(c == '0') {break;}
+	clear();
+
+	mar(0, "3. ls -l 세부 사항");
+
+	sleep(1);
+
+	mar(2, "$ ls -l 명령어는 프로세스가 위치한 디렉토리의 각 파일의 세부적인 정보들을 출력해 준다고 배웠습니다.");
+
+	mar(4, "구체적으로는 다음과 같이 출력됩니다.");
+
+	mar(6, "File 모드 및 권한 | 링크 수 | 파일을 소유한 사용자 이름 | 파일을 소유한 그룹 이름 | 파일 크기 | 마지막 수정 시간 | 파일명");
+
+	mar(8, "예시");
+
+	mar(10, "합계 64");
+
+	mar(12, "drwxrw-r-- 3 Moon knu 4096 12월 1일 17:19 temp_directoy");
+
+	mar(14, "가장 위에 나열되는 합계는 디렉토리 내부의 Block size를 의미합니다.");
+
+	mar(16, "Block은 쉽게 생각해서 모든 파일을 동등한 공간에 효율적으로 저장하고자 지정한 최소 크기입니다.");
+
+	mar(18, "A라는 파일은 1칸에 10 byte씩 저장하고 B라는 파일은 1칸에 300byte식 저장한다고 하면 저장 공간 관리 차원에서 비효율적일 것입니다.");
+
+	mar(18, "이를 예방하고자 나온 개념이 Block입니다. 기본적으로 Linux 계열 커널은 block 1개가 512 byte의 크기를 가집니다.");
+
+	mar(20, "다음으로는 1줄씩 출력되는 파일의 정보를 상세하게 알아보도록 하겠습니다.");
+
+	mar(22, "첫 번째로 나오는 파일 모드와 두 번째로 나오는 링크 수는 다음 페이지에서 상세하게 다루도록 하겠습니다.");
+	
+	mar(24, "그 다음 항목들로는 moon과 knu가 출력되었습니다. 모든 파일은 사용자 및 그룹에 속해있는데 순서대로 해당 파일의 사용자 이름(moon)과 그룹 이름(knu)을 나타냅니다.");
+
+	mar(26, " 다음의 4096은 파일의 크기를 의미합니다. 기본적으로 파일 크기는 byte 단위로 나타내며 $ ls -lh 와 같이 h 옵션을 추가하여 사람이 보기 편한 형식으로 바꾸어 줄 수 있습니다.");
+
+	mar(28, "참고로 리눅스 계열에서 디렉토리의 파일 크기는 거의 4096으로 출력됩니다. 이는, 디스크에서 디렉토리에 대한 메타 정보를 저장하는데 보통 4096(4kb)가 필요하기 때문입니다.");
+
+	mar(30, "이후에 나오는 수정 시간과 파일명은 직관적으로 이해할 수 있으실 것입니다.");
+
+	mar(32, "다음 페이지에서 파일 모드와 링크 수에 대해서 알아보겠습니다.");
+
+	mar(36, "Enter to Continue (0 : 종료)");
+	getnstr(&c, 1);
+	if(c == '0') {break;}
+	clear();
+
+	mar(0, "3-1. File 모드와 권한");
+
+	sleep(1);
+
+	mar(2, "이전의 예시에서 drwxrw-r--과 같이 출력되었습니다.");
+
+	mar(4, "이는 파일의 상태와 권한에 대해서 나타내는 정보인데 첫 번째 칸이 파일의 상태(File인지, Directory인지 등등)을 나타내고 뒤에 9칸이 권한을 나타냅니다.");
+
+	mar(6, "해당 예시에서 첫 번째 칸이 d로 채워져있는 것은 directory임을 의미합니다.");
+
+	mar(8, "그리고 순서대로 3칸씩 파일의 사용자에 대한 권한, 그룹에 대한 권한, 기타 사용자에 대한 권한을 나타냅니다.");
+
+	mar(10, "즉, 2~4칸 : User 권한, 5~7칸 : Group 권한, 8~10칸 : Others 권한 입니다.");
+
+	mar(12, "그리고 각 칸은 r, w, x의 순서로 채워지는데 각각 읽기, 쓰기, 실행 권한을 의미합니다.");
+
+	mar(14, "해당 칸에 대한 권한이 없을 경우 - 로 표시합니다.");
+
+	mar(16, "예시의 경우를 따져보면, User는 읽고 쓰고 실행하는 것이 가능하고, Gruop은 읽고 쓰는 것만, Others는 읽는 것만 가능한 디렉토리였습니다.");
+
+	mar(18, "추가적으로, 파일 권한에 대해서 3가지의 Special bit가 존재합니다.");
+
+	mar(20, "첫 번째로 suid bit입니다. 해당 비트가 활성화 되어 있는 파일의 경우 파일의 소유 권한이 없는 사용자라도 사용 권한이 있는 것처럼 실행할 수 있게 됩니다.");
+
+	mar(22, "이를 조금 더 어렵게 말해서 user id를 effective한 user id로 설정하였다고 표현합니다.");
+	
+	mar(24, "suid bit가 활성화되면 4번째 칸인 User 권한 영역의 x자리가 s로 표기됩니다.");
+
+	mar(26, "두 번째는 sgid bit입니다. sgid 비트는 suid와 비슷한 역할을 그룹에게 해준다고 생각하면 됩니다.");
+
+	mar(28, "즉, group id를 effective한 gruop id로 바꾸어 사용 권한이 있는 그룹처럼 해당 파일을 실행할 수 있게 해줍니다.");
+
+	mar(30, "sgid bit가 활성화되면 7번째 칸인 Group 영역의 x자리가 s로 표기됩니다.");
+
+	mar(32, "마지막 special bit는 sticky bit입니다. sticky bit는 파일에 적용된 경우와 디렉토리에 적용이 된 경우에 따라 역할이 달라집니다.");
+
+	mar(34, "우선 파일에 적용이 되었을 경우 해당 파일이 사용되지 않게 되었을 때 메모리에서 해제하지 않고 그대로 유지하게 됩니다.");
+
+	mar(36, "다음에 사용하게 되었을 때 디스크에서 따로 파일을 불러와서 메모리에 할당할 필요없이 바로 사용하면 되는 것이죠.");
+
+	mar(38, "디렉토리에 적용이 되었을 경우 해당 디렉토리를 공용 디렉토리처럼 모두가 사용할 수 있도록 합니다. 하지만 삭제나 이름 변경등은 실제 소유자나 슈퍼 유저만 할 수 있습니다.");
+
+	mar(40, "리눅스 터미널에서 $ chmod g+x 와 같이 파일의 권한을 변경할 수 있으니 직접 실습해보며 익혀보는 것도 좋을 것 같습니다.");
+
+	mar(44, "Enter to Continue (0: 종료)");
+
+	getnstr(&c, 1);
+	if(c == '0') {break;}
+	clear();
+
+	mar(0, "3-2. 링크");
+	
+	sleep(1);
+
+	mar(2, "세부적인 내용은 이후의 챕터에서 다룰 것이니 간단하게만 설명을 드리겠습니다.");
+
+	mar(4, "링크는 파일이 다른 것들과 연결된 포인터의 개수라고 생각하시면 됩니다.");
+
+	mar(6, "A라는 파일이 2라는 링크를 가지고 있다면 디렉토리 또는 파일에 연결된 포인터가 2개가 있다고 생각하시면 됩니다.");
+
+	mar(8, "저희가 파일을 디렉토리 내부에 새롭게 생성할 때도, 파일의 내용이 작성된 이후에 현재 디렉토리와의 연결 포인터를 하나 만듭니다. 따라서 링크 수가 1로 생성됩니다."); 
+
+	mar(10, "기타 하드 링크나 심볼릭 링크를 통해서도 파일 간의 값을 공유하거나 참조할 수 있는데 자세한 방법들은 이후의 챕터에서 다룰 것이니");
+
+	mar(12, "링크의 개념만 인지하시고 하드 링크나 심볼릭 링크라는 방법을 통해서 링크를 만들 수 있음을 이해하시면 될 것 같습니다.");
+
+	mar(16, "Enter to Continue");
+
+	getnstr(&c, 1);
+	if(c == '0')
+	{break;}
+	clear();
+	
+	}
+
+}
+
+void chap3_command()
+{
+	 initscr();
+
+        while(1)
+        {
+                clear();
+                refresh();
+
+                char c;
+
+                mar(0, "챕터 3의 C언어 함수를 살펴봅니다.");
+
+                sleep(1);
+
+                mar(2, "1. opendir");
+
+                mar(4, "2. readdir");
+
+                mar(6, "3. closedir");
+
+                mar(8, "4. stat");
+
+                mar(10, "5. chmod");
+
+                mar(12, "6. chown");
+
+                mar(14, "0. 종료");
+
+                mar(16, "번호를 입력해주세요 : ");
+
+                getnstr(&c, 1);
+
+                switch(c)
+                {
+                        case '1':
+                                clear();
+                                mar(0, "opendir 함수 정리");
+                                mar(2, "헤더 파일 : <sys/types.h> <dirent.h>");
+                                mar(4, "용도 : 디렉토리를 열고자 할 때 사용");
+                               	mar(6, "사용 방법 : DIR* opendir(const char* name)");
+				mar(7, "name : 열고자 하는 디렉토리 이름"); 
+                                mar(9, "예시) opendir('..')");
+                               	mar(11, "실패 시 NULL 반환, 성공시 디렉토리 구조체 포인터 DIR* 반환"); 
+				mar(13, "파일 디스크립터와 비슷하며 디렉토리 처리가 완료되면 닫아주는 것을 잊지 말 것!");
+				mar(17, "Enter to end");
+				getnstr(&c, 1);
+				break;
+
+                        case '2':
+                                clear();
+                                mar(0, "readdir 함수 정리");
+                                mar(2, "헤더 파일 : <sys/types.h> <dirent.h>");
+				mar(4, "용도 : 특정 디렉토리 내용을 읽기 위해서 사용");
+				mar(6, "사용 방법 : struct dirent* readdir(DIR* dir)");
+				mar(7, "opendir을 통해 반환받은 값을 인자로 넣어주면 됨.");
+				mar(9, "예시) DIR* dir_ptr, struct dirent* entry로 선언되어 있을 때,");
+				mar(10, "entry = readdir(dir_ptr) 과 같이 사용");
+				mar(12, "실패 시 NULL qksghks, 성공 시 dirent 구조체에 대한 포인터(struct dirent*) 반환");                                
+				mar(16, "Enter to end");
+				getnstr(&c, 1);
+				break;
+
+                        case '3':
+                                clear();
+                                mar(0, "closedir 함수 정리");
+                                mar(2, "헤더 파일 : <sys/types.h> <dirent.h>");
+                                mar(4, "용도 : opendir() 호출로 반환 받았던 DIR과 연관된 디렉토리를 닫을 때 사용. 즉, 디렉토리를 닫을 때 사용");
+				mar(6, "사용 방법 : int closedir(Dir* dirp)");	
+				mar(8, "예시) closedir(dir_ptr)");
+                                mar(10, "실패시 -1 반환, 성공시 0 반환");
+				mar(14, "Enter to end");	
+				getnstr(&c, 1);
+				break;
+	
+			case '4':	
+				clear();
+				mar(0, "stat 함수 정리");
+				mar(2, "헤더 파일 : <sys/stat.h>");
+				mar(4, "용도 : 파일 크기, 권한, 생성 일자, 최종 변경일 등의 파일의 상태나 정보를 얻기 위해 사용");
+				mar(6, "사용 방법 : stat(const char* pathname, struct stat* statbuf");
+				mar(7, "pathname에는 현재 디렉토리 내부의 파일 이름이나 읽고자 하는 파일의 경로를 넘겨줘야 함");
+				mar(8, "statbuf에는 비어 있는 stat 구조체 포인터를 넘겨주어야 함 (읽어온 정보를 저장할 공간으로 활용됨)");
+				mar(10, "예시) char dirname = 'dir', struct stat* ptr 일때,");
+				mar(11, "stat(dirname, ptr) 과 같이 사용");	
+				mar(13, "실패 시 -1 반환, 성공 시 0 반환 (성공적으로 파일 정보를 조회하였음을 의미)");
+				mar(17, "Enter to end");
+				getnstr(&c, 1);
+				break;
+				
+			case '5':
+				clear();
+				mar(0, "chomod 함수 정리");
+				mar(2, "헤더 파일 : <sys/types.h> <sys/stat.h>");
+				mar(4, "용도 : 파일의 권한을 바꾸거나 Special bit(suid, sgid, sticky)을 활성화하기 위해서 활용");
+				mar(6, "사용 방법 : int chmod(char* path, mode_t mode)");
+				mar(7, "path는 파일의 경로를 의미");
+				mar(8, "mode는 파일 생성함수인 creat와 비슷하게 8진수 활용");
+				mar(10, "예를 들어 mode에 0764를 넣어줬다면? ");
+				mar(11, "0764 (8진수) -> 111 110 100 (2진수)");
+				mar(12, "따라서 파일의 권한을 rwx rw- r-- 으로 재설정함");	
+				mar(14, "예시) chmod('/tmp/myfile', 04764) ");
+				mar(16, "실패 시 -1 반환, 성공 시 0 반환");
+				mar(20, "Enter to end");	
+				getnstr(&c, 1);
+				break;
+
+			case '6':
+				clear();
+				mar(0, "chown 함수 정리");
+				mar(2, "헤더 파일 : <unistd.h>");
+				mar(4, "용도 : 파일의 사용자나 그룹 아이디를 변경하기 위해서 사용. 즉, 파일의 소유 주체를 변경하기 위해서 사용");
+				mar(6, "사용 방법 : int chown(char* path, uid_t owner, gid_t group)");
+				mar(8, "예시) chown(filename, 100, 20) : 파일의 소유 주체가 uid가 100번인 사용자와 gid가 20번인 그룹으로 변경됨");	
+				mar(10, "실제 사용 시에는 uid와 pid 인수 자리에");
+				mar(11, "chmod(filename, user_info->pw_uid, group_info->gr_gid) 와 같이 다른 구조체의 값이 활용됨"); 
+				mar(13, "실패 시 -1 반환, 성공 시 0 반환");
+				mar(17, "Enter to end");
+				getnstr(&c, 1);
+				break;	
+
+			case '0':
+				endwin();
+				return;
+
+			default:
+				mar(20, "올바른 형식으로 입력해주세요.");
+				usleep(1000 * 0.5);
+		}
+	}
+}
 
 
 
