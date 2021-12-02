@@ -20,6 +20,12 @@ void chap3_goal();
 void chap3_concept();
 void chap3_command();
 
+// chap 4
+void chap4();
+void chap4_concept();
+void chap4_goal();
+void chap4_command();
+
 int main()
 {
 	setlocale(LC_ALL, "ko_KR.utf8");  // curses 함수에서 한글과 특수문자를 출력하기 위해 utf8 설정으로 바꾸어줌
@@ -361,6 +367,10 @@ void study()
 				break;
 
 			case '4':
+				clear();
+				endwin();
+				chap4();
+				break;
 
 			case '5':
 
@@ -1069,7 +1079,7 @@ void chap3_concept()
 	if(c == '0')
 	{break;}
 	clear();
-	
+	break;	
 	}
 
 }
@@ -1205,6 +1215,268 @@ void chap3_command()
 		}
 	}
 }
+
+void chap4()
+{
+        initscr();
+
+        while(1)
+        {
+                clear();
+
+                char choice;
+
+                mar(0, "챕터 4의 학습을 시작합니다.");
+
+                mar(2, "학습하실 항목을 선택해주세요.");
+
+                sleep(1);
+
+                mar(4, "1. 학습 주제 및 목표");
+
+                mar(6, "2. 개념 학습");
+
+                mar(8, "3. C언어 함수 정리");
+
+                mar(10, "0. 종료");
+
+                mar(12, "번호를 입력해주세요 : ");
+
+                getnstr(&choice, 1);
+
+                switch(choice)
+                {
+                        case '1':
+                                endwin();
+                                chap4_goal();
+                                break;
+
+                        case '2':
+                                endwin();
+                                chap4_concept();
+                                break;
+
+                        case '3':
+                                endwin();
+                                chap4_command();
+                                break;
+
+                        case '0':
+                                endwin();
+                                return ;
+
+                        default:
+                                mar(16, "올바른 형식으로 입력해주세요.");
+                                usleep(1000 * 0.5);
+                }
+        }
+}
+
+void chap4_goal()
+{
+        initscr();
+        char c;
+        while(1)
+        {
+                clear();
+
+                mar(0, "●  학습 주제 : File System과 Unix 내부 구조 파헤치기");
+
+                mar(2, "●  학습 목표 : ");
+
+                mar(4, "  1. ★  File system의 개념과 Unix 내부 구조를 파악할 수 있다.  ★");
+
+                mar(6, "  2. inode 개념을 이해하고 디렉토리 구조를 파악할 수 있다.");
+
+                mar(8, "  3. C언어로 pwd 명령어를 구현해 볼 수 있다.");
+
+                sleep(1);
+
+		mar(10, "이전의 챕터들과는 다르게 학습 주제를 특정 명령어가 아닌 File System과 Unix 내부 구조로 설정하였습니다.");
+
+		mar(12, "개인적으로 사용하는 환경의 기본적인 구조나 틀을 파악하는 것은 매우 중요하다고 생각했기 때문입니다.");
+	
+		mar(14, "그리고 저도 해당 부분을 통해서 많은 배움을 얻었기 때문에 4단원은 조금 더 집중해서 보시면 좋을 것 같습니다.");
+	
+		sleep(1);
+
+                mar(18, " Enter to back to menu");
+
+                getnstr(&c, 1);
+
+                endwin();
+                break;
+        }
+}
+
+void chap4_concept()
+{
+	initscr();
+       
+	 char c;
+       
+	 while(1)
+        {
+                clear();
+	        mar(0, "1. Directory Commands");
+
+                sleep(1);
+
+                mar(2, "4단원은 여러 개의 명령어들이 등장합니다. 따라서, 4단원 개념 정리는 각 명령어들의 간단한 사용법과 의미를 파악하는 것부터 시작하겠습니다.");
+
+		mar(4, "$ mkdir my_place : my_place라는 디렉토리를 만듭니다. mkdir은 make directory의 약자 입니다.");
+
+		mar(6, "$ rmdir my_place : my_place라는 디렉토리를 삭제합니다. 단, my_place가 비어 있을 경우만 삭제할 수 있습니다.");
+		mar(7, "파일이 들어 있는 디렉토리를 삭제하고 싶은 경우?? $ rmdir -r my_place -r 옵션을 주면 됩니다.");
+		mar(8, "-r 옵션을 주는 것은 매우 위험한 명령이니 신중한 사용이 필요합니다. 추가로, rmdir은 remove directory의 약자입니다.");
+
+		mar(10, "$ mv old new :");
+
+		mar(12, "1. (이동) new라는 디렉토리가 있을 경우 old를 new로 이동시킵니다.");
+
+		mar(13, "2. (이름 변경) new라는 디렉토리가 없을 경우 old의 이름을 new로 바꿉니다."); 
+		
+		mar(15, "$ pwd : 현재 위치한 경로를 출력합니다.");
+		
+		mar(17, "$ cat input.txt : input.txt의 내용을 터미널에 출력합니다.");
+	
+		mar(19, "$ 임의의 명령어 > memo : "); 
+		mar(20, "1. memo라는 파일이 있을 경우 memo 파일의 내용을 명령어의 결과값으로 바꿉니다.");
+		mar(21, "2. memo라는 파일이 없을 경우 memo 파일을 생성 후 명령어의 결과값으로 내용을 채워줍니다.");
+		mar(22, "사용 예시) who > input.txt");
+
+		mar(24, "ln from.txt target.txt : from.txt로부터 target.txt로의 하드 링크를 생성합니다.");
+		
+		mar(26, "ln -s from.txt target.txT : from.txt로부터 target.txt로의 심볼릭 링크를 생성합니다.");
+
+		mar(28, "하드 링크와 심볼릭 링크?? 둘의 기능과 차이점은 뒤에서 자세하게 다루도록 하겠습니다.");
+
+		mar(30, "$ du : 해당 디렉토리로부터 하위 디렉토리 및 파일들에 대한 디스크 사용량을 출력합니다.");
+
+		mar(34, "Enter to Continue (0 : 종료)");
+
+                getnstr(&c, 1);
+                if( c == '0') {break;}
+
+                clear();
+                mar(0, "★  2. 디스크 구조  ★");
+
+                sleep(1);
+
+		mar(2, "저희가 파일을 다룰 때 파일은 디스크에 저장되어 있다고 표현합니다. 디스크란 무엇일까요?? 그 구조를 알아보겠습니다.");
+
+		mar(4, "디스크는 기본적으로 데이터를 저장하는 platter와 값을 읽고 쓸 수 있는 head로 구분되어 있습니다.");
+
+		mar(6, "그리고 저장공간인 platter는 각각 sector, track, cylinder와 같이 분류할 수 있습니다.");
+
+		mar(8, "조금 더 쉽게 표현해보겠습니다.");
+
+		mar(10, "디스크는 platter라는 이름의 CD가 여러 개 쌓여있는 모양을 하고 있습니다.");	
+
+		mar(12, "그리고 이 CD는 여러 개의 동심원으로 이루어져 있는데 이를 track이라고 부릅니다. (달리기 트랙을 연상하셔도 좋습니다.");
+
+		mar(14, "마지막으로, CD위의 이 track들은 여러 개의 블록으로 나누어져 있습니다. 이 때, 각각의 블록을 sector라고 부릅니다.");
+
+		mar(16, "sector는 platter의 최소 단위이며 저장 공간으로서 512 byte의 크기를 가집니다.");
+
+		mar(18, "저희가 파일을 생성한다는 것은 sector를 여러 개 배정받아 해당 칸에 내용을 작성한다고 생각하시면 될 것 같습니다.");
+
+		mar(20, "정리하자면, 최소 단위인 sector가 모여 track을 이루고, track이 platter라는 하나의 CD를 구성하며 platter가 층층이 쌓여 head와 함께 디스크를 구성하고 있습니다.");	
+		
+		mar(22, "참고로, cylinder는 각 platter에서 동일한 구간에 있는 track의 집합을 의미합니다.");
+
+		mar(24, "예를 들어, 설명의 편의성을 위해 디스크가 3개의 CD, 즉, 3개의 platter로 구성되어 있다고 하겠습니다.");
+
+		mar(26, "그리고 각 CD는 안쪽 track과 바깥쪽 track으로 나누어져 있다고 가정하겠습니다.");
+
+		mar(28, "그렇게 되면 해당 디스크에서는 2개의 cylinder가 존재합니다.");
+
+		mar(30, "첫 번째 cylinder : {1번째 CD의 안쪽 track, 2번째 CD의 안쪽 track, 3번째 CD의 안쪽 track}");
+
+		mar(32, "두 번째 cylinder : {1번째 CD의 바깥쪽 track, 2번째 CD의 바깥쪽 track, 3번째 CD의 바깥쪽 track}");
+
+		mar(36, "Enter to Continue (0 : 종료)");
+
+		getnstr(&c, 1);
+		if(c == '0') {break;}
+		
+		clear();
+		mar(0, "3. ★  파일 시스템  ★ ");
+		
+		sleep(1);
+
+		mar(2, "다음으로는 파일 시스템에 대해서 알아보겠습니다.");
+
+		mar(4, "파일 시스템이란 사용자가 파일에 쉽게 접근하고 발견할 수 있도록 운영체제가 디스크 상에서 일정한 규칙을 가지고 보관하는 방식을 의미합니다");
+
+		mar(6, "이 때 디스크는 실제로는 하나이지만 논리적으로 여러 개의 단위로 나누어져 저장 공간으로서 활용되는데 각각의 공간을 파티션(partiton)이라고 부릅니다.");	
+
+		mar(8, "디스크를 파티션으로 나누어 파일을 저장하는 이유는 파일 저장이 용이해지고, 파일의 검색과 관리를 효율적으로 할 수 있기 때문입니다.");
+
+		mar(10, "그렇다면, 파일을 저장하고 관리하는 방식이 다른 시스템과는 교류할 수 없는 것일까요??");
+
+		mar(12, "결론은 아닙니다! 유닉스에서는 파일 시스템의 계층을 크게 3가지로 나누어 외부 장치의 종류에 관계없이 데이터를 주고 받을 수 있도록 하고 있습니다."); 
+
+		mar(14, "1. Super block :");
+	
+		mar(16, "파일 시스템에 대한 정보( 각 데이터 구역의 크기, 사용되지 않는 데이터 블록 등) 를 담고 있습니다.");
+	
+		mar(18, "Unix의 버전에 따라 구조에 차이는 있을 수 있습니다.");
+
+		mar(20, "2. inode table");
+
+		mar(22, "모든 파일은 inode라고 불리는 자신만의 고유한 번호를 가지고 있습니다.");
+
+		mar(24, "inode에는 파일 소유자, 링크 수, 파일 크기 등의 파일에 관한 특성을 저장하고 있습니다. (파일에 대한 메타 정보)");
+
+		mar(26, "inode table은 이러한 inode 구조체의 배열입니다.");
+
+		mar(28, "3. data area");
+
+		mar(30, "data area는 파일의 내용물이 저장되는 공간입니다.");
+
+		mar(32, "데이터 블록 1칸은 4KB의 공간을 차지하며 12개의 블록을 배정 받을 경우 48KB의 용량을 가짐을 의미합니다.");
+
+		mar(34, "파일의 크기에 따라 데이터 블록에 파일의 내용이 아닌 다른 데이터 블록에 대한 주소(포인터)를 가지고 있을 수도 있습니다.");
+
+		mar(36, "이를 indirect block이라고 부르며 이러한 구조가 반복될 때마다 double indirect block, triple indirect block이라고 부릅니다.");
+
+		mar(40, "Enter to Continue (0 : 종료)");
+
+		getnstr(&c, 1);
+		if(c == '0') {break;}
+
+		clear();
+
+		
+		
+	}
+}
+
+
+void chap4_command()
+{
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
