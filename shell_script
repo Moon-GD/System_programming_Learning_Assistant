@@ -1,7 +1,13 @@
 #! /bin/bash
 
+echo "기본 환경을 설정합니다."
+sudo apt-get install libncursesw5-dev
+
+echo " "
 echo "시스템 프로그래밍 학습 도우미를 실행합니다."
-sleep 2.5
+sleep 1.5 
+
+
 
 cc -o start splash.c -lncursesw  && ./start
 
