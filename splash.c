@@ -1164,7 +1164,7 @@ void chap3_command()
                 {
                         case '1':
                                 clear();
-                                mar(0, "opendir 함수 정리");
+                                mar(0, "opendir 함수 정리 (open directory)");
                                 mar(2, "헤더 파일 : <sys/types.h> <dirent.h>");
                                 mar(4, "용도 : 디렉토리를 열고자 할 때 사용");
                                	mar(6, "사용 방법 : DIR* opendir(const char* name)");
@@ -1178,7 +1178,7 @@ void chap3_command()
 
                         case '2':
                                 clear();
-                                mar(0, "readdir 함수 정리");
+                                mar(0, "readdir 함수 정리 (read directory)");
                                 mar(2, "헤더 파일 : <sys/types.h> <dirent.h>");
 				mar(4, "용도 : 특정 디렉토리 내용을 읽기 위해서 사용");
 				mar(6, "사용 방법 : struct dirent* readdir(DIR* dir)");
@@ -1192,7 +1192,7 @@ void chap3_command()
 
                         case '3':
                                 clear();
-                                mar(0, "closedir 함수 정리");
+                                mar(0, "closedir 함수 정리 (close directory)");
                                 mar(2, "헤더 파일 : <sys/types.h> <dirent.h>");
                                 mar(4, "용도 : opendir() 호출로 반환 받았던 DIR과 연관된 디렉토리를 닫을 때 사용. 즉, 디렉토리를 닫을 때 사용");
 				mar(6, "사용 방법 : int closedir(Dir* dirp)");	
@@ -1204,7 +1204,7 @@ void chap3_command()
 	
 			case '4':	
 				clear();
-				mar(0, "stat 함수 정리");
+				mar(0, "stat 함수 정리 (status)");
 				mar(2, "헤더 파일 : <sys/stat.h>");
 				mar(4, "용도 : 파일 크기, 권한, 생성 일자, 최종 변경일 등의 파일의 상태나 정보를 얻기 위해 사용");
 				mar(6, "사용 방법 : stat(const char* pathname, struct stat* statbuf");
@@ -1219,7 +1219,7 @@ void chap3_command()
 				
 			case '5':
 				clear();
-				mar(0, "chomod 함수 정리");
+				mar(0, "chomod 함수 정리 (change mode)");
 				mar(2, "헤더 파일 : <sys/types.h> <sys/stat.h>");
 				mar(4, "용도 : 파일의 권한을 바꾸거나 Special bit(suid, sgid, sticky)을 활성화하기 위해서 활용");
 				mar(6, "사용 방법 : int chmod(char* path, mode_t mode)");
@@ -1236,7 +1236,7 @@ void chap3_command()
 
 			case '6':
 				clear();
-				mar(0, "chown 함수 정리");
+				mar(0, "chown 함수 정리 (change owner)");
 				mar(2, "헤더 파일 : <unistd.h>");
 				mar(4, "용도 : 파일의 사용자나 그룹 아이디를 변경하기 위해서 사용. 즉, 파일의 소유 주체를 변경하기 위해서 사용");
 				mar(6, "사용 방법 : int chown(char* path, uid_t owner, gid_t group)");
@@ -1367,36 +1367,36 @@ void chap4_concept()
 
                 mar(2, "4단원은 여러 개의 명령어들이 등장합니다. 따라서, 4단원 개념 정리는 각 명령어들의 간단한 사용법과 의미를 파악하는 것부터 시작하겠습니다.");
 
-		mar(4, "$ mkdir my_place : my_place라는 디렉토리를 만듭니다. mkdir은 make directory의 약자 입니다.");
+		mar(6, "①  $ mkdir my_place : my_place라는 디렉토리를 만듭니다. mkdir은 make directory의 약자 입니다.");
 
-		mar(6, "$ rmdir my_place : my_place라는 디렉토리를 삭제합니다. 단, my_place가 비어 있을 경우만 삭제할 수 있습니다.");
-		mar(7, "파일이 들어 있는 디렉토리를 삭제하고 싶은 경우?? $ rmdir -r my_place -r 옵션을 주면 됩니다.");
-		mar(8, "-r 옵션을 주는 것은 매우 위험한 명령이니 신중한 사용이 필요합니다. 추가로, rmdir은 remove directory의 약자입니다.");
+		mar(8, "②  $ rmdir my_place : my_place라는 디렉토리를 삭제합니다. 단, my_place가 비어 있을 경우만 삭제할 수 있습니다.");
+		mar(9, "  파일이 들어 있는 디렉토리를 삭제하고 싶은 경우?? -r 옵션을 주면 됩니다. ex) $ rmdir -r my_place");
+		mar(10, "  -r 옵션을 주는 것은 매우 위험한 명령이니 신중한 사용이 필요합니다. 추가로, rmdir은 remove directory의 약자입니다.");
 
-		mar(10, "$ mv old new :");
+		mar(12, "③  $ mv old new :");
 
-		mar(12, "1. (이동) new라는 디렉토리가 있을 경우 old를 new로 이동시킵니다.");
+		mar(14, "  1. (이동) new라는 디렉토리가 있을 경우 old를 new로 이동시킵니다.");
 
-		mar(13, "2. (이름 변경) new라는 디렉토리가 없을 경우 old의 이름을 new로 바꿉니다."); 
+		mar(15, "  2. (이름 변경) new라는 디렉토리가 없을 경우 old의 이름을 new로 바꿉니다."); 
 		
-		mar(15, "$ pwd : 현재 위치한 경로를 출력합니다.");
+		mar(17, "④  $ pwd : 현재 위치한 경로를 출력합니다.");
 		
-		mar(17, "$ cat input.txt : input.txt의 내용을 터미널에 출력합니다.");
+		mar(19, "⑤  $ cat input.txt : input.txt의 내용을 터미널에 출력합니다.");
 	
-		mar(19, "$ 임의의 명령어 > memo : "); 
-		mar(20, "1. memo라는 파일이 있을 경우 memo 파일의 내용을 명령어의 결과값으로 바꿉니다.");
-		mar(21, "2. memo라는 파일이 없을 경우 memo 파일을 생성 후 명령어의 결과값으로 내용을 채워줍니다.");
-		mar(22, "사용 예시) who > input.txt");
+		mar(21, "⑥  $ 임의의 명령어 > memo : "); 
+		mar(22, "  1. memo라는 파일이 있을 경우 memo 파일의 내용을 명령어의 결과값으로 바꿉니다.");
+		mar(23, "  2. memo라는 파일이 없을 경우 memo 파일을 생성 후 명령어의 결과값으로 내용을 채워줍니다.");
+		mar(24, "  사용 예시) who > input.txt");
 
-		mar(24, "ln from.txt target.txt : from.txt로부터 target.txt로의 하드 링크를 생성합니다.");
+		mar(26, "⑦  $ ln from.txt target.txt : from.txt로부터 target.txt로의 하드 링크를 생성합니다.");
 		
-		mar(26, "ln -s from.txt target.txT : from.txt로부터 target.txt로의 심볼릭 링크를 생성합니다.");
+		mar(28, "⑧  $ ln -s from.txt target.txT : from.txt로부터 target.txt로의 심볼릭 링크를 생성합니다.");
 
-		mar(28, "하드 링크와 심볼릭 링크?? 둘의 기능과 차이점은 뒤에서 자세하게 다루도록 하겠습니다.");
+		mar(30, "  하드 링크와 심볼릭 링크?? 둘의 기능과 차이점은 뒤에서 자세하게 다루도록 하겠습니다.");
 
-		mar(30, "$ du : 해당 디렉토리로부터 하위 디렉토리 및 파일들에 대한 디스크 사용량을 출력합니다.");
+		mar(32, "⑨  $ du : 해당 디렉토리로부터 하위 디렉토리 및 파일들에 대한 디스크 사용량을 출력합니다.");
 
-		mar(34, "Enter to Continue (0 : 종료)");
+		mar(36, "Enter to Continue (0 : 종료)");
 
                 getnstr(&c, 1);
                 if( c == '0') {break;}
@@ -1416,7 +1416,7 @@ void chap4_concept()
 
 		mar(10, "디스크는 platter라는 이름의 CD가 여러 개 쌓여있는 모양을 하고 있습니다.");	
 
-		mar(12, "그리고 이 CD는 여러 개의 동심원으로 이루어져 있는데 이를 track이라고 부릅니다. (달리기 트랙을 연상하셔도 좋습니다.");
+		mar(12, "그리고 이 CD는 여러 개의 동심원으로 이루어져 있는데 이를 track이라고 부릅니다. (달리기 트랙을 연상하셔도 좋습니다.)");
 
 		mar(14, "마지막으로, CD위의 이 track들은 여러 개의 블록으로 나누어져 있습니다. 이 때, 각각의 블록을 sector라고 부릅니다.");
 
@@ -1582,7 +1582,148 @@ void chap4_concept()
 
 void chap4_command()
 {
+	initscr();
 
+        while(1)
+        {
+                clear();
+                refresh();
+
+                char c;
+
+                mar(0, "챕터 4의 C언어 함수를 살펴봅니다.");
+
+                sleep(1);
+
+                mar(2, "1. mkdir");
+
+                mar(4, "2. rmdir");
+
+                mar(6, "3. unlink");
+
+                mar(8, "4. link");
+
+                mar(10, "5. rename");
+
+                mar(12, "6. chdir");
+
+                mar(14, "0. 종료");
+
+                mar(16, "번호를 입력해주세요 : ");
+
+                getnstr(&c, 1);
+
+                switch(c)
+                {
+                        case '1':
+                                clear();
+                                mar(0, "1. mkdir 함수 정리 (make directory)");
+				sleep(1);
+
+                                mar(2, "헤더 파일 : <sys/types.h> <sys/stat.h>");
+                                mar(4, "용도 : 새로운 디렉토리를 만들 때 사용");
+                                mar(6, "사용 방법 : int mkdir(char* pathname, mode_t mode)");
+               			mar(7, "pathname : 새로운 디렉토리의 이름, mode : 디렉토리 권한");
+				mar(8, "디렉토리 권한 설정 방법은 파일 생성할 때의 방법과 똑같음");
+	                	mar(10, "예시) mkdir('my_dir', 764)");
+				mar(12, "실패 시 -1 반환, 성공 시 0 반환");
+				mar(14, "참고로, 디렉토리 생성이 성공하면 자동적으로 .(dot)과 ..(dotdot)을 설치하여 현재 디렉토리와 상위 디렉토리의 정보를 저장함");	
+                               	 
+				mar(18, "Enter to end");
+                                getnstr(&c, 1);
+                                break;
+
+                        case '2':
+                                clear();
+                                mar(0, "2. rmdir 함수 정리 (remove directory)");
+				sleep(1);
+
+                                mar(2, "헤더 파일 : <unistd.h>");
+                                mar(4, "용도 : 비어 있는 디렉토리를 삭제하기 위해서 사용");
+				mar(6, "사용 방법 : int rmdir(const char* path)");
+				mar(8, "예시) rmdir('./my_dir')");
+				mar(10, "실패 시 -1 반환, 성공 시 0 반환");
+				mar(12, "디렉토리를 삭제하게 되면 부모 디렉토리와의 링크가 해제가 됨. 링크 수가 0이 되면 데이터 블록에서 free 된다.");
+				mar(14, "디렉토리의 기본 세트인 .(dot)과 ..(dotdot)을 제외하고는 어떠한 내용물도 가지고 있어서는 안됨. 즉, 비어 있는 상태여야 함.");
+				mar(18, "Enter to end");
+                                getnstr(&c, 1);
+                                break;
+
+
+			case '3':
+                                clear();
+                                mar(0, "3. unlink 함수 정리");
+				sleep(1);
+
+				mar(2, "헤더 파일 : <unistd.h>");
+				mar(4, "용도 : 디렉토리 내부의 디렉토리가 아닌 entry를 제외하는데 사용 (파일, 소스 코드 등)");
+				mar(6, "사용 방법 : int unlink(const char* path)");
+				mar(8, "예시 : unlink('./old_file.txt')");
+				mar(10, "실패 시 -1 반환, 성공 시 0 반환");
+                               	mar(12, "unlink는 삭제하고자 하는 파일과 현재 디렉토리 사이의 연결을 해제하여 link 수를 하나 줄이는 것임");
+				mar(14, "이 때, 해당 파일의 링크가 0이 될 경우, 데이터 블록에서도 해당 파일을 해제하게 됨. 즉, 모든 내용 free");
+				mar(18, "Enter to end");
+                                getnstr(&c, 1);
+                                break;
+
+                        case '4':      
+                                clear();
+                                mar(0, "4. link 함수 정리");
+				sleep(1);
+
+                                mar(2, "헤더 파일 : <unistd.h>");
+                                mar(4, "용도 : 파일 간의 새로운 링크를 생성하기 위해 사용 (디렉토리에는 사용 불가)");
+				mar(6, "사용 방법 : int link(const char* orig, const char* new)");
+				mar(8, "예시) link('./origianl.txt', './new.txt')");
+				mar(10, "해당 함수는 하드 링크를 형성하는 함수이기 때문에 다른 파일 시스템과는 사용 불가");
+				mar(12, "심볼릭 링크를 형성하기 위해서는 symlink 함수를 사용해야 한다.");
+				mar(14, "실패 시 -1 반환, 성공 시 0 반환");
+                                mar(18, "Enter to end");
+                                getnstr(&c, 1);
+                                break;
+
+                        case '5':
+                                clear();
+                                mar(0, "5. rename 함수 정리");
+				sleep(1);
+
+                                mar(2, "헤더 파일 : <unistd.h>");
+                                mar(4, "용도 : 파일의 이름 변경, 파일 위치 이동, 디렉토리의 이름 변경에 활용");
+				mar(6, "사용 방법 : int rename(const char* from, const char* to");
+				mar(8, "예시 1) rename('before', 'after') : before 파일의 이름을 after로 변경");
+				mar(9, "예시 2) rename('before', 'my_dir/after') : before 파일을 my_dir로 위치를 옮기고 이름을 after로 변경");
+				mar(11, "실패 시 -1 반환, 성공 시 0 반환");
+				mar(13, "참고로, 디렉토리를 하부 디렉토리로 이동시키는 것은 불가능");
+				mar(15, "잘못 사용한 예시) rename('./dir', ./dir/sub_dir') : 불가능!");
+                                mar(19, "Enter to end");
+                                getnstr(&c, 1);
+                                break;
+
+                        case '6':
+                                clear();
+                                mar(0, "6. chdir 함수 정리 (change directory)");
+				sleep(1);
+
+                                mar(2, "헤더 파일 : <unistd.h>");
+				mar(4, "용도 : 프로세스가 가지고 있는 현재 위치 정보를 변경하기 위해서 사용. 즉, 다른 디렉토리로 이동하기 위해서 사용");
+				mar(6, "사용 방법 : int chdir(const char* path)");
+				mar(8, "사용 예시) chdir('..') : 상위 디렉토리로 이동");
+				mar(10, "프로세스마다 현재 자신이 위치한 디렉토리 정보를 데이터로 가지고 있음. 해당 정보를 바꾸는 것임");
+				mar(12, "실패 시 -1 반환, 성공 시 0 반환");
+				mar(16, "Enter to end");
+                                getnstr(&c, 1);
+                                break;
+
+                        case '0':
+                                endwin();
+                                return;
+
+                        default:
+                                mar(20, "올바른 형식으로 입력해주세요.");
+                                usleep(1000 * 0.5);
+
+		}
+	}
 }
 
 
