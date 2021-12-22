@@ -28,6 +28,15 @@ void chap4_concept();
 void chap4_goal();
 void chap4_command();
 
+// chap 5
+void chap5();
+void chap5_concept();
+void chap5_goal();
+void chap5_command();
+
+// chap 6
+
+
 int main()
 {
 	setlocale(LC_ALL, "ko_KR.utf8");  // curses 함수에서 한글과 특수문자를 출력하기 위해 utf8 설정으로 바꾸어줌
@@ -415,6 +424,10 @@ void study()
 				break;
 
 			case '5':
+				clear();
+				endwin();
+				chap5();
+				break;
 
 			case '6':
 
@@ -1726,19 +1739,369 @@ void chap4_command()
 	}
 }
 
+void chap5()
+{
+        initscr();
+
+        while(1)
+        {
+                clear();
+
+                char choice;
+
+                mar(0, "챕터 5의 학습을 시작합니다.");
+
+                mar(2, "학습하실 항목을 선택해주세요.");
+
+                sleep(1);
+
+                mar(4, "1. 학습 주제 및 목표");
+
+                mar(6, "2. 개념 학습");
+
+                mar(8, "3. C언어 함수 정리");
+
+                mar(10, "0. 종료");
+
+                mar(12, "번호를 입력해주세요 : ");
+
+                getnstr(&choice, 1);
+
+                switch(choice)
+                {
+                        case '1':
+                                endwin();
+                                chap5_goal();
+                                break;
+
+                        case '2':
+                                endwin();
+                                chap5_concept();
+                                break;
+
+                        case '3':
+                                endwin();
+                                chap5_command();
+                                break;
+
+                        case '0':
+                                endwin();
+                                return ;
+
+                        defalut:
+                                mar(16, "올바른 형식으로 입력해주세요.");
+                                usleep(1000 * 0.5);
+                }
+        }
+}
+
+void chap5_goal()
+{
+        initscr();
+        char c;
+        while(1)
+        {
+                clear();
+
+                mar(0, "●  학습 주제 : stty란 무엇인가");
+
+                mar(2, "●  학습 목표 : ");
+		
+		mar(4, "  1. Unix에서 디바이스가 구현된 방식을 이해하고 다룰 수 있다.");
+
+		mar(6, "  2. 디바이스와 파일의 공통점과 차이점을 정확하게 이해할 수 있다.");
+
+                mar(8, "  3. ★  터미널 드라이버의 특성을 공부하고 세팅 값을 조정할 수 있다. ★");
+
+		mar(10, "  (3번은 시험에서 거의 항상 나올 정도로 중요한 부분이니 꼼꼼하게 공부하시는 것을 추천드립니다.");
+
+                sleep(1);
+
+                mar(14, " Enter to back to menu");
+
+                getnstr(&c, 1);
+
+                endwin();
+                break;
+        }
+}
+
+void chap5_concept()
+{
+        initscr();
+
+         char c;
+
+         while(1)
+        {
+                clear();
+                mar(0, "1. Unix에서 디바이스의 구현");
+
+                sleep(1);
+
+		mar(2, "Unix에서 사운드 카드, 터미널, 마우스, 스피커 등의 디바이스들은 모두 파일 형태로 구현되어 있습니다.");
+
+		mar(4, "여기서 파일이라고 하면 저희가 이전 단원까지 다루었던 일반적인 파일들을 의미합니다.");
+
+		mar(6, "관례적으로, 디바이스와 관련된 파일들은 /dev 디렉토리에 저장되어 있습니다.");
+
+		mar(8, "해당 디렉토리로 이동해보면 각 디바이스들은 파일처럼 이름, inode 번호, 소유자 ID, permission bit 등을 가지고 있음을 확인할 수 있습니다.");	
+
+		mar(10, "저희가 이전까지 파일을 다루었을 때, open, read, write, lseek, close, stat 등의 system call 함수를 활용하였습니다.");
+
+		mar(12, "디바이스 또한 파일의 형태로 구현되었기 때문에 대다수의 작업들을 동일하게 적용할 수 있습니다.");
+
+		mar(14, "[※ 예외※ ]");
+		mar(15, "마우스 디바이스는 특성 상 write 함수가 적용되지 않습니다.");
+		mar(16, "터미널은 파일의 위치라는 개념이 존재하지 않기 때문에 lseek 함수가 적용되지 않습니다.");
+		mar(18, "위의 예시처럼 일부 예외적인 경우도 있지만 디바이스의 특성과 연관지어 생각해보시면 쉽게 이해하고 예외적으로 처리하실 수 있을 것입니다."); 
+
+		mar(20, "디바이스 파일은 크게 디바이스 드라이버 정보, 주 번호(major number), 부 번호(minor number)를 포함하고 있습니다.");
+
+		mar(22, "디바이스 파일은 일반 파일과는 다르게 inode 번호가 호출이 될 경우 디스크가 아닌 각 디바이스 별로 구분된 드라이버의 통제를 받습니다.");
+
+		mar(24, "드라이버 정보는 해당 디바이스의 관할소 같은 역할을 하는 드라이버에 대한 정보를 포함합니다.");
+
+		mar(26, "주 번호와 부 번호는 디바이스의 소속을 나타낸다고 생각하시면 될 것 같습니다.");
+	
+		mar(28, "간단하게 말씀을 드리자면 주 번호는 디바이스의 종류를 구분해주는 번호이고, 부 번호는 같은 종류의 디바이스 내부에서 각각의 기기들을 구분해주는 번호입니다.");
+
+		mar(30, "예를 들어, USB가 3의 주 번호를 가진다고 하겠습니다. 여기서 USB-A와 USB-B가 있다면,");
+		
+		mar(32, "두 개의 USB는 여러 개의 주 번호 중에서 3의 주 번호를 할당받게 되고 그 중에서 1번과 2번의 부 번호를 각각 부여받음으로써 서로를 구분짓게 됩니다.");
+
+		mar(34, "초등학생들이 학년에 따라 나뉘고 거기서 몇 반인지에 따라서 교실을 나누어 쓰게 됩니다.");
+
+		mar(36, "이러한 상황에 비유적으로 주 번호가 학년, 부 번호가 반을 나타낸다고 이해하셔도 편할 것 같습니다.");
+
+		mar(38, "저희와 같은 학생의 입장에서는 크게 활용할 일이 없으니 이러한 개념이 있음을 인지하고만 계시면 될 것 같습니다.");
+
+		mar(42, "Enter to Continue ( 0 : 종료 )");
+
+                getnstr(&c, 1);
+                if( c == '0') {break;}
+
+                clear();
+                mar(0, "★  2. 디스크 연결의 특성  ★");
+
+		mar(2, "이번 장에서 다룰 내용들은 모두 2021-2학기 중간고사에 출제되었던 내용들입니다. 눈 여겨서 보시면 도움이 될 것입니다.");
+
+		mar(4, "디스크에 연결된 파일들은 크게 2가지의 특성을 가지고 있습니다. Buffering과 Auto-Append Mode가 바로 그것입니다.");
+
+		mar(6, "해당 특성들은 파일마다 내부에서 bit단위로 통제 변수(Control Variables)로 조정할 수 있습니다.");
+
+		mar(8, "파일을 다루는 Unix 헤더파일인 fcntl.h를 활용해서 파일의 통제 변수들을 가져와서(1), 수정하고(2), 해당 값들을 반환(3)해주면 됩니다.");
+
+		mar(10, "하나씩 살펴보겠습니다.");
+
+		mar(12, "파일의 통제 변수는 주로 fcntl함수를 통해서 다루어집니다. 첫 번째인 buffering 특성에서는 O_SYNC 비트를 다루게 됩니다.");
+
+		mar(14, "원래는 쓰기 작업을 수행할 때 버퍼에서 작성이 완료되면 쓰기를 담당하는 함수(write 등)는 종료되고 버퍼의 내용을 파일로 옮겨적게 됩니다.");
+
+		mar(16, "하지만 O_SYNC 비트가 설정되면 버퍼의 내용이 파일로 모두 옮겨질 때까지 쓰기 함수는 종료되지 않습니다. 확실한 파일의 작성을 보장해주는 것이지요.");
+
+		mar(18, "이러한 과정을 입출력 동기화라고 합니다. O_SYNC 비트는 입출력 동기화를 담당하는 비트인 것입니다.");
+
+		mar(20, "입출력 동기화는 확실한 파일의 작성을 보장해 줄 수 있다는 장점이 있지만,");
+
+		mar(22, "커널과 사용자 영역에서의 소모시간을 늘리고 메모리 잔류가 일어나며 버퍼의 실질적인 장점이 사라지게 됩니다.");
+
+		mar(24, "따라서 전문가들은 입출력 동기화는 정말 최후의 보루로만 사용하라고 권고하고 있습니다.");
+ 
+		mar(26, "두 번째로 살펴볼 특성은 Auto-Append Mode 입니다. 해당 모드는 여러 개의 프로그램이 한 번에 실행이 될 필요가 있을 때 유용한 모드입니다.");
+
+		mar(28, "예를 들어, A와 B라는 기기에서 만 원이 있는 계좌에 접속하였고, 두 기기 모두 천 원을 출금하려고 합니다."); 
+
+		mar(30, "그러면 다음과 같은 일이 발생할 수 있습니다.");	
+
+		mar(32, "00시 1초) A기기 잔액 확인 (10,000원)");
+		mar(33, "00시 2초) B기기 잔액 확인 (10,000원)");
+		mar(34, "00시 3초) A기기 천 원 출금 이후 확인했던 잔액에서 천 원 차감 (9,000원)");
+		mar(35, "00시 4초) B기기 춴 원 출금 이후 확인했던 잔액에서 천 원 차감 (9,000원)");
+		mar(36, "00시 5초) 해당 계좌의 최종 금액 : 9,000원 ?? ");
+
+		mar(38, "위의 예시에서 작업 수행의 순서가 엇갈려 예상하지 못한 결과값을 가지게 되었습니다. 이러한 문제를 Race-Condition이라고 합니다.");
+
+		mar(40, "Auto-Append Mode는 이러한 문제들을 극복하고자 여러 프로세스를 하나로 묶어서 수행하게 합니다.");
+
+		mar(42, "위의 사례를 예로 들자면 잔액 확인과 출금을 동시에 수행하도록 하여 사용자간, 디바이스 간의 어긋남이 발생하지 않도록 도와주는 것입니다.");
+
+		mar(44, "이렇게 하나로 묶어주는 작업을 Atomic-operation이라고 합니다.");
+
+		mar(46, "기말고사에서도 다루어 질 중요한 내용이니 꼭 이해하고 넘어가셨으면 좋겠습니다.");
+
+		mar(50, "Enter to Continue ( 0 : 종료 )");
+
+		getnstr(&c, 1);
+		if( c == '0') {break;}
+
+		clear();
+		mar(0, "★  3. 터미널 연결의 특성  ★");
+
+		mar(2, "터미널은 상대적으로 더 복잡하고 훨씬 많은 특성들에 의해서 통제가 발생합니다. 그 중 주로 다루어지는 것들을 위주로 이야기해보겠습니다.");
+
+		mar(4, "터미널 드라이버의 속성을 보고 싶다면 $ stty 혹은 $ stty -all 과 같은 Unix 명령어로 확인할 수 있습니다.");
+
+		mar(6, "또한, stty 뒤에 여러 옵션을 주어서 터미널 드라이버의 속성을 변경할 수 있습니다.");
+
+		mar(8, "예시) $ stty -echo : 터미널의 echo 속성을 끈다");
+
+		mar(10, "터미널 드라이버의 작업은 크게 4가지로 나누어집니다. Input, Output, Control Settings, Local의 4가지 입니다.");
+	
+		mar(12, "이 중 저희는 Local processing의 echo mode와 canonical 모드에 대해서 공부하게 됩니다.");
+
+		mar(14, "하나씩 배워보도록 하겠습니다.");
+
+		mar(16, "첫 번째로 echo mode는 무엇일까요? 바로 사용자의 입력을 화면에 보여줄 수 있도록 설정된 상태를 echo mode라고 합니다.");
+
+		mar(18, "반대로, echo mode를 끄게 된다면 사용자가 아무리 입력을 하더라도 화면에는 보여지지 않게 됩니다.");
+
+		mar(20, "저희가 Unix 터미널을 사용하는 일반적인 상태가 echo mode입니다. 그렇다면 non-echo-mode는 언제 활용될 수 있을까요?");
+
+		mar(22, "하나의 예를 들자면 게임에서 활용될 수 있을 것입니다. 사용자가 입력하는 키를 굳이 보여주지 않아도 된다면 echo mode를 해제함으로써 구현할 수 있는 것입니다.");
+
+		mar(24, "터미널 드라이버의 속성을 변경하는 과정은 디스크 연결에서의 과정과 비슷합니다.");
+
+		mar(26, "터미널 드라이버에서 속성들을 받아오고(1), 사용자가 원하는 대로 변경을 한 이후에(2), 드라이버로 다시 돌려주면(3) 설정이 완료가 됩니다.");
+
+		mar(28, "다른 점이 있다면 터미널 드라이버는 추가적으로 터미널 드라이버의 속성 변경 시점을 결정할 수 있습니다.");
+
+		mar(30, "TCSANOW : 드라이버 속성을 즉시 변경함");
+
+		mar(32, "TCSADRAIN : 대기 중인 출력은 모두 기달렸다가 드라이버 속성을 변경함");
+
+		mar(34, "TCSAFLUSH : 대기 중인 출력을 모두 기달렸다가 출력이 완료되면 input 데이터를 싹 비우고 드라이버 속성을 변경함");
+
+		mar(36, "두 번째로 공부하게 될 canonical mode는 6장에서 다루도록 하겠습니다.");
+
+		mar(40, "Enter to Continue ( 0 : 종료 )"); 
+
+		getnstr(&c, 1);
+		if( c == '0') {break;}
+
+		break;
+	}
+	endwin();
+}
+
+void chap5_command()
+{
+        initscr();
+
+        while(1)
+        {
+                clear();
+                refresh();
+
+                char c;
+
+                mar(0, "챕터 5의 C언어 함수를 살펴봅니다.");
+
+                sleep(1);
+
+                mar(2, "1. fcntl");
+
+                mar(4, "2. tcgetattr");
+
+                mar(6, "3. tcsetattr");
+
+                mar(8, "4. ioctl");
+
+                mar(10, "0. 종료");
+
+                mar(12, "번호를 입력해주세요 : ");
+
+                getnstr(&c, 1);
+
+                switch(c)
+                {
+                        case '1':
+                                clear();
+                                mar(0, "1. fcntl 함수 정리 (file control)");
+                                sleep(1);
+
+				mar(2, "헤더 파일 : <fcntl.h> <unistd.h> <sys/types.h>");
+				mar(4, "용도 : 파일 디스크립터를 다루고자 할 때 사용");
+				mar(6, "사용 방법 : int result fcntl(int fd, int cmd) 혹은 int result fcntl(int fd, int cmd, long arg)");
+				mar(7, "fd : 파일 디스크립터 번호");
+				mar(8, "cmd : 수행할 작업 번호, 보통 F_GETFL 혹은 F_SETFL 를 인자로 넣어줌");
+				mar(9, "arg : 파일 특성 변경 이후 변경된 특성을 해당 인자로 넣어줌");
+				mar(11, "예시 1) s = fcntl(fd, F_GETFL) : 파일 특성을 담고 있는 bit를 s에 저장");
+				mar(12, "예시 2) result = fcntl(fd, F_SETFL, s) : 변경한 파일 특성 s를 fd에 반영하고 해당 함수의 성공 여부를 result에 저장");
+				mar(14, "실패 시 -1 반환, 성공 시 -1이 아닌 숫자를 반환");
+				mar(18, "Enter to End");
+
+                                getnstr(&c, 1);
+                                break;
+
+			case '2':
+                                clear();
+                                mar(0, "2. tcgetattr 함수 정리 (terminal control variables get attribute)");
+                                sleep(1);
+	
+				mar(2, "헤더 파일 : <termios.h> <unistd.h>");
+				mar(4, "용도 : 터미널 드라이버의 세팅 값들을 읽어오기 위해서 사용");
+				mar(6, "사용 방법 : int result = tcgetattr(int fd, struct termios *info)");
+				mar(7, "fd : 터미널 드라이버에 연결할 파일 디스크립터 번호");
+				mar(8, "info : 해당 함수는 사용하기 전에 정보를 담아올 termios 구조체를 선언해주어야 한다. 선언이 완료되면 해당 구조체의 주소 값을 인자로 전달해주면 된다.");
+				mar(10, "예시) struct termios info; int result; : termios 구조체로 info 선언, 결과 값 저장할 정수형 변수 result 선언");
+				mar(11, "예시) result = tcgetattr(0, &info) : termios 구조체인 info를 활용하여 0번 파일 디스크립터에 터미널 연결, 성공 여부는 result에 저장");
+				mar(13, "실패 시 -1 반환, 성공 시 0 반환");
+				mar(17, "Enter to End");
+                                
+				getnstr(&c, 1);
+                                break;
 
 
+			case '3':
+                                clear();
+                                mar(0, "3. tcsetattr 함수 정리 (terminal control variables set attribute)");
+                                sleep(1);
 
+				mar(2, "헤더 파일 : <termios.h> <unistd.h>");
+				mar(4, "용도 : 터미널 드라이버의 세팅 값들을 변경한 이후에 반영해주기 위해서 사용");
+				mar(6, "사용 방법 : int result = tcsetattr(int fd, int when, struct termios* info)");
+				mar(7, "fd : 터미널에 연결되어 있는 파일 디스크립터 번호");
+				mar(8, "when : 터미널 변경 시점");
+				mar(9, "  - TCSANOW : 드라이버의 설정 값을 즉시 변경");
+				mar(10, "  - TCSADRAIN : 대기 중인 출력들은 기다려주었다가 드라이버의 설정 변경");
+				mar(11, "  - TCSAFLUSH : 대기 중인 출력들은 기다려주었다가 출력이 완료되면 input 데이터를 싹 비우고 드라이버의 설정 변경");
+				mar(12, "info : 터미널 구조체에 대한 주소값");
+				mar(14, "예시) tcsetattr(0, TCSANOW, &info) : termios 구조체인 info와 0번 파일 디스크립터를 통해 연결된 드라이버의 설정을 즉시 변경");
+				mar(16, "실패 시 -1 반환, 성공 시 0 반환");
+				mar(20, "Enter to End");
 
+                                mar(18, "Enter to end");
+                                getnstr(&c, 1);
+                                break;
 
+			case '4':
+                                clear();
+                                mar(0, "4. ioctl 함수 정리");
+                                sleep(1);
 
+				mar(2, "헤더 파일 : <sys/ioctl.h>");
+				mar(4, "용도 : 디바이스를 다루기 위해서 사용");
+				mar(6, "사용 방법 : int result = ioctl(int fd, int operation, [, arg])");
+				mar(7, "fd : 디바이스와 연결된 파일 디스크립터 번호");
+				mar(8, "operation : 수행할 작업 번호");
+				mar(9, "arg : 추가적인 옵션 정보");
+				mar(11, "실패 시 -1 반환, 성공 시 -1이 아닌 다른 값을 반환");
+				mar(15, "Enter to End");
+                                
+				getnstr(&c, 1);
+                                break;
 
+			 case '0':
+                                endwin();
+                                return;
 
-
-
-
-
-
+       	                 default:
+                                mar(20, "올바른 형식으로 입력해주세요.");
+                                usleep(1000 * 0.5);
+		}
+	}
+}
 
 
 
