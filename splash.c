@@ -2,10 +2,13 @@
 #include <stdio.h>
 #include <ncurses.h>  // cureses 함수들 사용
 #include <locale.h>  // setlocale, LC_ALL
-#include <unistd.h>  // sleep, usleep
+#include <unistd.h>  // sleep, usleep, fork
 #include <signal.h>  // signal 함수들 사용
+#include <stdlib.h>  // exit
+#include <sys/wait.h>  // wait
 
 // 기본 display
+void drawing();
 void menu();  // menu 선택 화면
 void background();  // 만들게 된 배경
 void study();
@@ -62,146 +65,167 @@ int main()
 
 	endwin();
 
-	// cureses 함수 사용
-	initscr();
-	clear();
+	int pid;
 
-	for(int time = 0 ; time < 7;time++)
+	pid = fork();
+
+	if(pid == -1)
 	{
-		if(time % 2 == 1)
-			standout();
-	
-		// H	
-		for(int i = 20;i<40;i++)
-		{
-			move(i, 19);
-			addstr("■");	
-			move(i, 20);
-			addstr("■");
-			move(i, 41);
-			addstr("■");	
-			move(i, 40);
-			addstr("■");
-		}
-		for(int i=22;i<39;i++)
-		{
-			move(29, i);
-			addstr("■");	
-			move(30, i);
-			addstr("■");
-		}
-
-		// E
-		for(int i=20;i<40;i++)
-		{
-			move(i, 59);
-			addstr("■");
-			move(i, 60);
-			addstr("■");
-		}
-
-		for(int i=61;i<79;i++)
-		{
-			move(20, i);
-			addstr("■");
-			move(21, i);
-			addstr("■");
-			move(29, i);
-			addstr("■");
-			move(30, i);
-			addstr("■");
-			move(38, i);
-			addstr("■");
-			move(39, i);
-			addstr("■");
-		}
-
-		// L
-		for(int i=20;i<40;i++)
-		{
-			move(i, 94);
-			addstr("■");
-			move(i, 95);
-			addstr("■");
-		}
-
-		for(int i=96;i<115;i++)
-		{
-			move(38, i);
-			addstr("■");
-			move(39, i);
-			addstr("■");
-		}		
-
-		// L
-		for(int i = 20;i<40;i++)
-		{
-			move(i, 130);
-			addstr("■");
-			move(i, 131);
-			addstr("■");
-		}
-
-		for(int i = 132;i<150;i++)
-		{
-			move(38, i);
-			addstr("■");
-			move(39, i);
-			addstr("■");
-		}	
-
-		// O
-		for(int i = 20;i<40;i++)
-		{
-			move(i, 165);
-			addstr("■");
-			move(i, 166);
-			addstr("■");
-			move(i, 182);
-			addstr("■");
-			move(i, 183);
-			addstr("■");	
-		}
-
-		for(int i = 167;i<182;i++)
-		{
-			move(20, i);
-			addstr("■");
-			move(21, i);
-			addstr("■");
-			move(38, i);
-			addstr("■");
-			move(39, i);
-			addstr("■");
-		}
-
-		move(LINES-1, COLS-1);
-
-		if(time % 2 == 1)
-			standend();
-
-		refresh();
-		usleep(1000 * 300);
+		fprintf(stderr, "프로세스 분기에 실패하였습니다.");
+		exit(1);
+	}
+	else if(pid == 0)
+	{
+		drawing();
+	}
+	else
+	{
+		// 메뉴 선택 화면
+		wait(NULL);
+		menu();	
 	}
 
-	move(50, 90);
-	addstr("Made by 문 경 덕");
-	move(LINES - 1, COLS - 1);	
-	refresh();
-	usleep(1000 * 300);
-
-	move(53, 90);
-	addstr("Enter to start");
-	move(LINES - 1, COLS - 1);
-	refresh();	
-	
-	getch();
-	endwin();
-
-	// 메뉴 선택 화면
-	menu();	
-
 	return 0;	
+}
+
+void drawing()
+{
+	initscr();
+        clear();
+
+        for(int time = 0 ; time < 7;time++)
+        {
+                if(time % 2 == 1)
+                        standout();
+
+                // H
+                for(int i = 20;i<40;i++)
+                {
+                        move(i, 19);
+                        addstr("■");
+                        move(i, 20);
+                        addstr("■");
+                        move(i, 41);
+                        addstr("■");
+                        move(i, 40);
+                        addstr("■");
+                }
+                for(int i=22;i<39;i++)
+                {
+                        move(29, i);
+                        addstr("■");
+                        move(30, i);
+                        addstr("■");
+                }
+
+                // E
+                for(int i=20;i<40;i++)
+                {
+                        move(i, 59);
+                        addstr("■");
+                        move(i, 60);
+                        addstr("■");
+                }
+
+                for(int i=61;i<79;i++)
+                {
+                        move(20, i);
+                        addstr("■");
+                        move(21, i);
+                        addstr("■");
+                        move(29, i);
+                        addstr("■");
+                        move(30, i);
+                        addstr("■");
+                        move(38, i);
+                        addstr("■");
+                        move(39, i);
+                        addstr("■");
+                }
+		
+		// L
+                for(int i=20;i<40;i++)
+                {
+                        move(i, 94);
+                        addstr("■");
+                        move(i, 95);
+                        addstr("■");
+                }
+
+                for(int i=96;i<115;i++)
+                {
+                        move(38, i);
+                        addstr("■");
+                        move(39, i);
+                        addstr("■");
+                }
+
+                // L
+                for(int i = 20;i<40;i++)
+                {
+                        move(i, 130);
+                        addstr("■");
+                        move(i, 131);
+                        addstr("■");
+                }
+
+                for(int i = 132;i<150;i++)
+                {
+                        move(38, i);
+                        addstr("■");
+                        move(39, i);
+                        addstr("■");
+                }
+
+                // O
+                for(int i = 20;i<40;i++)
+                {
+                        move(i, 165);
+                        addstr("■");
+                        move(i, 166);
+                        addstr("■");
+                        move(i, 182);
+                        addstr("■");
+                        move(i, 183);
+                        addstr("■");
+                }
+
+                for(int i = 167;i<182;i++)
+                {
+                        move(20, i);
+                        addstr("■");
+                        move(21, i);
+                        addstr("■");
+                        move(38, i);
+                        addstr("■");
+                        move(39, i);
+                        addstr("■");
+                }
+
+                move(LINES-1, COLS-1);
+
+                if(time % 2 == 1)
+                        standend();
+
+                refresh();
+                usleep(1000 * 300);
+        }
+	
+	move(50, 90);
+        addstr("Made by 문 경 덕");
+        move(LINES - 1, COLS - 1);
+        refresh();
+        usleep(1000 * 300);
+
+        move(53, 90);
+        addstr("Enter to start");
+        move(LINES - 1, COLS - 1);
+        refresh();
+	
+	char c;
+	getnstr(&c, 1);	
+		
+        endwin();
 }
 
 void inform(int signum)
@@ -298,9 +322,6 @@ void menu()
 				addstr("올바른 형식으로 입력해주세요 ex) 1");	
 				usleep(1000 * 0.5);
 		}
-
-	
-
 	}
 }
 
@@ -2303,13 +2324,13 @@ void chap6_concept()
 
 		mar(20, "   시그널 처리를 담당하는 함수를 signal_handling 함수라고 합니다. signal_handling 함수는 signal이 발생하였을 경우 수행할 작업에 대해서 정리되어 있어야 합니다.");
 
-		mar(22, "   또한, signal 함수를 호출하기 전에 int 형으로 정의되어야 합니다.");
+		mar(22, "   또한, signal 함수를 호출하기 전에 int형 인자를 전달받을 수 있도록 정의되어 있어야 합니다.");
 
-		mar(26, "예시) int signal-handler(); : signal-handling 함수 등록");
+		mar(26, "예시) void signal-handler(int); : signal-handling 함수 등록");
 		
 		mar(28, "예시) signal(SIGINT, signal-handler); : SIGINT signal이 발생하면 signal-handler라는 함수를 호출");
 
-		mar(30, "예시) signal-handler 함수가 int 형으로 선언되어 있으므로 정상적으로 수행 (그렇지 않은 경우 오류 발생) ");
+		mar(30, "예시) signal-handler 함수의 인자가 int 형으로 선언되어 있으므로 정상적으로 수행 (그렇지 않은 경우 오류 발생) ");
 
 		mar(32, "signal과 signal_handler 함수는 프로세스가 사용자, 다른 프로세스, 커널과 의사소통을 할 수 있는 하나의 방식으로 굉장히 중요한 개념입니다.");
 
@@ -2435,7 +2456,7 @@ void chap6_command()
 
 				mar(8, "signum : 시그널 번호. 보통 SIGINT, SIGQUIT 등의 상수로 인자를 전달");		
 			
-				mar(10, "action : 1. SIGDFL : signal을 그대로 처리, 2. SIGIGN : signal 무시, 3. int형 signal_handling 함수 : 함수 내용 수행");
+				mar(10, "action : 1. SIGDFL : signal을 그대로 처리, 2. SIGIGN : signal 무시, 3. int를 인자로 가지는 signal_handling 함수 : 함수 내용 수행");
 
 				mar(12, "예시) signal(SIGINT, SIGDFL) : SIGINT번의 시그널이 발생하였을 경우 그대로 처리");
 
@@ -2467,8 +2488,6 @@ void credit()
 
 	char c;
 
-	char msg0[400] = "------------------------------------------------------------------------------------------------------------------------";
-
 	char msg1[400] = "정설영 교수님의 수업을 수강하였던 수학과 17학번 문경덕 입니다.";
 
 	char msg2[400] = "시스템 프로그래밍 기말고사 프로젝트로 해당 프로그램을 만들어 보게 되었습니다.";
@@ -2496,22 +2515,20 @@ void credit()
 	char msg13[400] = "감사합니다~~!! ";
 
 	message(0, "후기");
-	message(2, msg0);
-	message(4, msg1);
-	message(6, msg2);
-	message(8, msg3);
-	message(10, msg4);
-	message(12, msg5);
-	message(14, msg6);
-	message(16, msg7);
-	message(18, msg8);
-	message(20, msg9);
-	message(22, msg10);
-	message(24, msg11);
-	message(26, msg12);
-	message(28, msg13);
-	message(30, msg0);
-	message(32, "Enter to End");
+	message(2, msg1);
+	message(4, msg2);
+	message(6, msg3);
+	message(8, msg4);
+	message(10, msg5);
+	message(12, msg6);
+	message(14, msg7);
+	message(16, msg8);
+	message(18, msg9);
+	message(20, msg10);
+	message(22, msg11);
+	message(24, msg12);
+	message(26, msg13);
+	message(30, "Enter to End");
 
 	getnstr(&c, 1);
 	endwin();
