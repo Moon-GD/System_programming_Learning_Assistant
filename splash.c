@@ -9,6 +9,7 @@
 void menu();  // menu 선택 화면
 void background();  // 만들게 된 배경
 void study();
+void credit();
 
 // chap 2
 void chap2();
@@ -35,7 +36,10 @@ void chap5_goal();
 void chap5_command();
 
 // chap 6
-
+void chap6();
+void chap6_concept();
+void chap6_goal();
+void chap6_command();
 
 int main()
 {
@@ -62,7 +66,7 @@ int main()
 	initscr();
 	clear();
 
-	for(int time = 0 ; time < 5;time++)
+	for(int time = 0 ; time < 7;time++)
 	{
 		if(time % 2 == 1)
 			standout();
@@ -250,21 +254,16 @@ void menu()
 		refresh();
 		
 		move(6, 0);
-		addstr("3. 참고 자료");	
+		addstr("3. 크레딧");	
 		usleep(1000 * 700);
 		refresh();
 		
 		move(8, 0);
-		addstr("4. 크레딧");	
-		usleep(1000 * 700);
-		refresh();
-		
-		move(10, 0);
 		addstr("0. 종료");	
 		usleep(1000 * 700);
 		refresh();
 
-		move(12, 0);
+		move(10, 0);
 		addstr("번호를 입력해주세요 : ");
 		refresh();
 		
@@ -282,10 +281,13 @@ void menu()
 				clear();
 				endwin();	
 				study();
-				break;		
+				break;
+
 			case '3':
-	
-			case '4':
+				clear();
+				endwin();
+				credit();
+				break;
 
 			case '0':
 				endwin();
@@ -302,7 +304,7 @@ void menu()
 	}
 }
 
-#define mars(row, msg) {move(row, 0); addstr(msg); refresh(); sleep(7); }
+#define mars(row, msg) {move(row, 0); addstr(msg); refresh(); sleep(5); }
 // 매크로 함수 정의 move_addstr_refresh_sleep
 
 void background()
@@ -333,7 +335,7 @@ void background()
 
 	mars(22, "더 나아가 프로그램이 다듬어져서 어느 정도의 퀄리티를 갖추게 된다면 정설영 교수님의 수업을 듣게 될");
 
-	mars(24, "초심자 분들께도 도움을 드릴 수 있을 것이라고 생각하였습니다.");
+	mars(24, "제 주변의 초심자 분들께도 도움을 드릴 수 있을 것이라고 생각하였습니다.");
 
 	mars(26, "공적으로나 개인적으로나 여러모로 도움이 된다고 생각했기 때문에 망설이지 않고 해당 프로젝트를 시작하게 되었습니다.");
 
@@ -381,23 +383,19 @@ void study()
 
 		sleep(1);
 
-		mar(4, "1. chap 1_OT");
+		mar(4, "2. chap 2_who");
 
-		mar(6, "2. chap 2_who");
+		mar(6, "3. chap 3_ls");
 
-		mar(8, "3. chap 3_ls");
+		mar(8, "4. chap 4_pwd");
 
-		mar(10, "4. chap 4_pwd");
+		mar(10, "5. chap 5_stty");
 
-		mar(12, "5. chap 5_stty");
+		mar(12, "6. chap 6_signal");
 
-		mar(14, "6. chap 6_signal");
+		mar(14, "0. back to menu");
 
-		mar(16, "7. chap 7_event-driven");
-
-		mar(18, "0. back to menu");
-
-		mar(20, "번호를 입력해주세요 : ");
+		mar(16, "번호를 입력해주세요 : ");
 
 		getnstr(&chap, 1);
 		
@@ -430,8 +428,10 @@ void study()
 				break;
 
 			case '6':
-
-			case '7':
+				clear();
+				endwin();
+				chap6();
+				break;
 
 			case '0':
 				endwin();
@@ -2102,6 +2102,426 @@ void chap5_command()
 		}
 	}
 }
+
+void chap6()
+{
+        initscr();
+
+        while(1)
+        {
+                clear();
+
+                char choice;
+
+                mar(0, "챕터 6의 학습을 시작합니다.");
+
+                mar(2, "학습하실 항목을 선택해주세요.");
+
+                sleep(1);
+
+                mar(4, "1. 학습 주제 및 목표");
+
+                mar(6, "2. 개념 학습");
+
+                mar(8, "3. C언어 함수 정리");
+
+                mar(10, "0. 종료");
+
+                mar(12, "번호를 입력해주세요 : ");
+
+                getnstr(&choice, 1);
+
+                switch(choice)
+                {
+                        case '1':
+                                endwin();
+                                chap6_goal();
+                                break;
+
+                        case '2':
+                                endwin();
+                                chap6_concept();
+                                break;
+
+                        case '3':
+                                endwin();
+                                chap6_command();
+                                break;
+
+                        case '0':
+                                endwin();
+                                return ;
+
+                        defalut:
+                                mar(16, "올바른 형식으로 입력해주세요.");
+                                usleep(1000 * 0.5);
+                }
+        }
+}
+
+void chap6_goal()
+{
+        initscr();
+        char c;
+        while(1)
+        {
+                clear();
+
+                mar(0, "●  학습 주제 : 터미널 드라이버의 모드와 시그널");
+
+                mar(2, "●  학습 목표 : ");
+
+                mar(4, "  1. ★  터미널 드라이버의 특성을 이해하고 변경할 수 있다 ★");
+                
+		mar(6, "  2. ★  Siganl 함수가 무엇인지 이해하고 handling하며 사용할 수 있다. ★");
+
+                mar(8, "해당 단원은 시험에 항상 나올 정도로 중요하기 때문에 꼭 짚고 넘어가셔야 됩니다!!");
+
+                sleep(1);
+
+                mar(12, " Enter to back to menu");
+
+                getnstr(&c, 1);
+
+                endwin();
+                break;
+        }
+}
+
+void chap6_concept()
+{
+        initscr();
+
+         char c;
+
+         while(1)
+        {
+                clear();
+                mar(0, "1. Software Tool과 Device-Specific Program의 차이");
+
+                sleep(1);
+
+		mar(2, "①  Software Tool :");
+	
+		mar(4, "  Software Tool은 표준 입력이나 파일들에서 값을 읽어오고 표준 출력 디스크립터나 표준 에러 출력 디스크립터로 출력을 하는 프로그램들을 일컫습니다.");
+
+		mar(6, "  Unix에는 저희와 친근한 ls, who, sort, grep 등의 수백개의 Software Tool이 존재합니다.");
+
+		mar(8, "  해당 도구들은 stdin(0번)이라고 하는 입력 창이나 파일로부터 값을 읽어들이고 stdout(1)이나 stderr(2)라고 하는 출력 창을 통해 값을 출력한다는 공통점이 있습니다.");
+
+		mar(10, "  대다수의 프로세스들은 생성과 동시에 stdin, stdout, stderr의 3개의 파일 디스크립터를 할당받습니다.");
+
+		mar(12, "  즉, 사용자들은 open 명렁어를 통해 파일 디스크립터를 따로 만들지 않고 해당 프로그램들을 사용할 수 있는 것이지요.");
+
+		mar(14, "②  Device-Specific Program : ");
+
+		mar(16, "  그에 반해, Device-Specific Program들은 특정 기기와 상호작용하는 데에 초점이 맞추어져 있습니다.");
+
+		mar(18, "  예를 들어 음량 조절, 음소거 등의 프로그램이 있다면 사운드 디바이스와 상호작용하기 위해 만들어져있다고 볼 수 있는 것입니다.");
+
+		mar(20, "  해당 프로그램들은 각 디바이스를 관할하는 드라이버에서 setting 정보를 필요에 따라 변경하며 작업을 수행합니다.");
+
+		mar(22, "  여러 디바이스 중에서 이번 챕터에서는 터미널을 다루는 방법에 대해서 공부하게 될 것입니다.");
+
+		mar(26, "참고로, Software Tool을 다룰 때 pipe라는 함수를 통해서 파일들간의 정보를 교류하고 입출력의 방향을 바꿀 수 있습니다.");
+
+		mar(28, "자세한 내용은 기말고사 범위에서 다루어지니 참고하시면 될 것 같습니다.");
+
+		mar(32, "Enter to Continue ( 0 : 종료 )");	
+
+                getnstr(&c, 1);
+                if( c == '0') {break;}
+	
+		clear();
+		mar(0, "★  2. 터미널 설정 값 조정 ★");
+
+		sleep(1);
+
+		mar(2, "지난 챕터에서는 터미널의 local 설정 값 중 echo bit를 다루어봤습니다.");
+
+		mar(4, "이번 챕터에서는 터미널 드라이버의 속성인 ICANON 비트와 파일 속성인 O_NDELAY 비트를 공부하겠습니다.");
+
+		mar(6, "ICANON bit는 입출력 버퍼의 버퍼링과 편집 기능에 대해서 관할하는 비트입니다.");
+
+		mar(8, "해당 비트를 어떻게 설정하느냐에 따라서 터미널의 모드가 크게 3가지로 나누어집니다.");
+
+		mar(10, " ①  canonical mode ( cooked mode ) ");
+
+		mar(12, "   버퍼링과 편집 기능이 모두 설정되어 있는 모드입니다. 글자 하나 혹은 단어를 지우는 작업이 가능합니다.");
+
+		mar(14, " ②  noncanonical mode ( cr mode ) ");
+
+		mar(16, "   버퍼링과 편집 기능이 모두 꺼져있는 모드입니다. 글자를 입력하는 순간 바로 출력되어 글자의 편집이 불가능 합니다.");
+
+		mar(18, "   따라서, 글자를 지우는 것을 의미하는 백 스페이스바를 입력할 경우 하나의 글자로 인식되어 출력됩니다.");
+
+		mar(20, " ③  non-anthing mode ( raw mode ) ");
+	
+		mar(22, "   모든 프로그램이 각각 비트 단위로 쪼개져 통제를 받고 작업을 수행하게 됩니다. 또한, 프로그램이 입력을 받을 경우 버퍼를 거치지 않고 바로 프로그램으로 전달됩니다.");
+
+		mar(25, "프로그래머는 작성하고 있는 프로그램의 용도에 맞게 터미널의 속성을 설정하는 것이 중요합니다.");
+
+		mar(28, "두 번째로 다루게 될 비트는 O_NDELAY 비트 입니다.");
+
+		mar(30, "해당 비트는 터미널 속성이 아닌 파일 속성이며 설정 값에 따라 파일을 읽을 때의 방식이 크게 2가지로 나뉘게 됩니다.");
+
+		mar(32, " ①  설정되어 있지 않은 경우 ");
+
+		mar(34, "   저희가 기존에 사용하는 대로 사용자나 파일로부터 입력이 들어올 때까지 프로세스가 block된 상태로 기다립니다.");
+
+		mar(36, " ②  설정되어 있는 경우");
+
+		mar(38, "   해당 비트가 설정되어 있는 파일에서 입력을 받아들일 때 아무 값도 입력이 되지 않는 경우 기다리지 않고 0을 반환하며 종료합니다.");
+
+		mar(42, "Enter to Continue ( 0 : 종료 ) ");
+
+		getnstr(&c, 1);
+		if( c == '0' ) {break;}
+
+		clear();
+		mar(0, "3. Signal");
+
+		sleep(1);
+
+		mar(2, "시그널이란 커널로부터 프로세스에게 전달되는 메시지라고 생각하면 됩니다.");
+
+		mar(4, "해당 메시지를 통해서 프로세스는 특정 프로그램을 종료하거나 타이머를 설정하는 등의 작업을 수행할 수 있습니다.");
+
+		mar(6, "반대로, 특정 시그널을 수행하지 않도록 무시하라는 메시지를 보낼 수도 있습니다.");
+
+		mar(8, "그렇다면 시그널은 어떻게 발생이 되는 것일까요? 바로 사용자나 다른 프로세스 혹은 커널 스스로에게서 발생하게 됩니다.");
+
+		mar(10, "위에서 설명한 것처럼 시그널이 발생하게 된다면 프로세스에서 처리하는 방식에 대해서 정의를 내려주어야 합니다.");
+
+		mar(12, "이 때 시그널 처리를 담당하는 방식은 크게 3가지로 나뉘게 됩니다.");
+
+		mar(14, " ①  SIG_DFL : signal을 그대로 수행");
+
+		mar(16, " ②  SIG_IGN : signal을 무시");
+
+		mar(18, " ③  함수 호출");
+
+		mar(20, "   시그널 처리를 담당하는 함수를 signal_handling 함수라고 합니다. signal_handling 함수는 signal이 발생하였을 경우 수행할 작업에 대해서 정리되어 있어야 합니다.");
+
+		mar(22, "   또한, signal 함수를 호출하기 전에 int 형으로 정의되어야 합니다.");
+
+		mar(26, "예시) int signal-handler(); : signal-handling 함수 등록");
+		
+		mar(28, "예시) signal(SIGINT, signal-handler); : SIGINT signal이 발생하면 signal-handler라는 함수를 호출");
+
+		mar(30, "예시) signal-handler 함수가 int 형으로 선언되어 있으므로 정상적으로 수행 (그렇지 않은 경우 오류 발생) ");
+
+		mar(32, "signal과 signal_handler 함수는 프로세스가 사용자, 다른 프로세스, 커널과 의사소통을 할 수 있는 하나의 방식으로 굉장히 중요한 개념입니다.");
+
+		mar(36, " Enter to Continue ( 0 : 종료 ) ");
+
+		getnstr(&c, 1);
+		if( c == '0' ) {break;}
+
+		break;
+	}
+	endwin();
+}
+
+void chap6_command()
+{
+        initscr();
+
+        while(1)
+        {
+                clear();
+                refresh();
+
+                char c;
+
+                mar(0, "챕터 6의 C언어 함수를 살펴봅니다.");
+
+                sleep(1);
+
+                mar(2, "1. fflush");
+
+                mar(4, "2. sleep");
+
+                mar(6, "3. tolower");
+
+                mar(8, "4. signal");
+
+                mar(10, "0. 종료");
+
+                mar(12, "번호를 입력해주세요 : ");
+
+                getnstr(&c, 1);
+
+                switch(c)
+                {
+                        case '1':
+                                clear();
+                                mar(0, "1. fflush 함수 정리");
+                                sleep(1);
+
+				mar(2, "헤더 파일 : <stdio.h>");
+		
+				mar(4, "용도 : 주로 버퍼의 내용을 비우거나 버퍼에서 머무르고 있는 문자를 빼내기 위해서 사용");
+
+				mar(6, "예시) fflush(stdout) : 버퍼의 내용을 바로 stdout으로 출력한다.");
+
+				mar(8, "사용자의 입출력을 다룰 경우 버퍼링은 자주 발생하는 문제입니다. 문자가 버퍼에서 머무르면서 출력이 되지 않는 것입니다.");
+
+				mar(10, "이럴 경우 fflush를 통해서 버퍼의 내용을 비워줍니다.");
+
+				mar(14, "Enter to End");
+
+				getnstr(&c, 1);
+				break;
+
+                        case '2':
+                                clear();
+                                mar(0, "2. sleep 함수 정리");
+                                sleep(1);
+
+				mar(2, "헤더 파일 : <unistd.h>");
+
+				mar(4, "용도 : 초 단위로 프로그램을 block 시키기 위해서 사용");
+
+				mar(6, "사용 방법 : sleep(3); : 3초간 프로그램 정지");
+
+				mar(8, "해당 함수와 비슷한 함수로 첫 문자가 대문자로 시작하는 Sleep함수가 있습니다.");
+
+				mar(10, "Sleep 함수는 window 환경에서 사용되는 함수로 Unix나 Linux를 사용할 경우에는 소문자로 시작하는 sleep 함수를 사용합니다.");
+
+				mar(12, "두 함수를 헷갈리지 않도록 조심합니다 !!");
+
+				mar(16, "Enter to End");
+
+                                getnstr(&c, 1);
+                                break;
+
+			case '3':
+                                clear();
+                                mar(0, "3. tolower 함수 정리");
+                                sleep(1);
+
+				mar(2, "헤더 파일 : <ctype.h>");
+					
+				mar(4, "용도 : 영어 알파벳을 소문자로 바꾸어주기 위해서 사용");
+
+				mar(6, "사용 방법 : int result = tolower(int c)");
+
+				mar(8, "c : 바꾸어 줄 문자의 아스키 코드 값");
+
+				mar(10, "tolower 함수의 인자로 'A'와 같이 문자를 전달해주어도 됩니다. 그렇게 전달하여도 결과 값은 똑같이 'a'의 아스키 코드 번호가 반환이 됩니다.");
+
+				mar(12, "다른 문자가 들어올 경우? 해당 문자를 그대로 반환합니다.");
+
+				mar(14, "비슷한 함수로 toupper 함수가 있습니다. 해당 함수는 전달받은 알파벳의 대문자 아스키 코드 값을 반홥합니다.");
+
+				mar(16, "예시) toupper('b') = B의 아스키 코드 값인 66 반환");
+
+				mar(20, "Enter to End");
+
+                                getnstr(&c, 1);
+                                break;
+
+			case '4':
+				clear();
+				mar(0, "4. signal 함수 정리");
+				sleep(1);
+
+				mar(2, "헤더 파일 : <signal.h> ");
+
+				mar(4, "용도 : signal handling을 위해서 사용");
+
+				mar(6, "사용 방법 : int result = signal( int signum, void (*action) (int))");
+
+				mar(8, "signum : 시그널 번호. 보통 SIGINT, SIGQUIT 등의 상수로 인자를 전달");		
+			
+				mar(10, "action : 1. SIGDFL : signal을 그대로 처리, 2. SIGIGN : signal 무시, 3. int형 signal_handling 함수 : 함수 내용 수행");
+
+				mar(12, "예시) signal(SIGINT, SIGDFL) : SIGINT번의 시그널이 발생하였을 경우 그대로 처리");
+
+				mar(13, "예시) signal(10, SIGINT) : 10번의 시그널은 발생하여도 무시");
+
+				mar(15, "실패 시 -1 반환, 성공 시 -1이 아닌 값을 반환");
+
+				mar(19, "Enter to End");
+	
+				getnstr(&c, 1);
+				break;
+
+			case '0':
+                                endwin();
+                                return;
+
+                         default:
+                                mar(20, "올바른 형식으로 입력해주세요.");
+                                usleep(1000 * 0.5);
+                }
+        }
+}
+
+#define message(row, msg) {move(row, 0); addstr(msg); refresh(); sleep(2);} 
+
+void credit()
+{
+	initscr();
+
+	char c;
+
+	char msg0[400] = "------------------------------------------------------------------------------------------------------------------------";
+
+	char msg1[400] = "정설영 교수님의 수업을 수강하였던 수학과 17학번 문경덕 입니다.";
+
+	char msg2[400] = "시스템 프로그래밍 기말고사 프로젝트로 해당 프로그램을 만들어 보게 되었습니다.";
+
+	char msg3[400] = "한 학기를 공부하면서 학부생 수준에서 필요하다고 생각되는 기본적인 내용들을 위주로 작성해두었습니다.";
+
+	char msg4[400] = "최대한 간결하고 이해하기 쉬우면서 내용들은 알차게 구성하고자 하였으나 프로젝트를 제출할 때가 되어 돌아보니 부족한 부분이 많은 것 같습니다.";
+
+	char msg5[400] = "핑계를 대보자면 길지 않은 기말 고사 기간 동안에 7개의 전공 과목을 병행하면서 개인적인 시간을 내기가 쉽지가 않았던 것 같습니다..";
+
+	char msg6[400] = "그래도 최대한 중간고사의 중요 범위인 signal까지는 프로젝트 내용으로 담고자 노력하였습니다.";
+
+	char msg7[400] = "향후 제 프로그램을 사용하게 될 분들께서는 '같은 컴퓨터의 길을 걷는 학생으로서 열심히 노력했구나'라고 생각해주셨으면 감사할 것 같습니다.";
+
+	char msg8[400] = "전 Unix와 Linux에 관한 아무런 배경 지식도 가지고 있지 않은 채로 (정말 아무것도 모르는 상태로) 해당 수업을 수강하게 되었습니다.";
+
+	char msg9[400] = "그럼에도 정설영 교수님의 시스템 프로그래밍 수업을 들으며 정말 많은 내용을 머릿 속에 집어 넣고 제 것으로 만들 수 있었습니다.";
+
+	char msg10[400] = "그렇다면 컴퓨터를 전공하는 여러분들은 훨씬 더 해당 수업에 잘 적응할 수 있으리라 믿습니다.";
+
+	char msg11[400] = "혹시나 저와 같은 비전공자 분들이라면 '나와 같은 수준에 있는, 혹은 나보다 못한 사람도 잘 배워서 나갔구나.'라고 자신감을 얻으시면 좋을 것 같습니다.";
+
+	char msg12[400] = "모든 분들이 열심히 하셔서 해당 수업 내용을 본인의 것으로 만들고 좋은 성적을 가져가시길 기원하겠습니다. (^-^) ";
+
+	char msg13[400] = "감사합니다~~!! ";
+
+	message(0, "후기");
+	message(2, msg0);
+	message(4, msg1);
+	message(6, msg2);
+	message(8, msg3);
+	message(10, msg4);
+	message(12, msg5);
+	message(14, msg6);
+	message(16, msg7);
+	message(18, msg8);
+	message(20, msg9);
+	message(22, msg10);
+	message(24, msg11);
+	message(26, msg12);
+	message(28, msg13);
+	message(30, msg0);
+	message(32, "Enter to End");
+
+	getnstr(&c, 1);
+	endwin();
+}
+
+
+
+
+
+
 
 
 
